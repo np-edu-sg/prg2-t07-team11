@@ -1,0 +1,32 @@
+image: mcr.microsoft.com/dotnet/sdk:6.0
+
+stages:
+  - format
+  - build
+
+variables:
+  OBJECTS_DIRECTORY: 'obj'
+  NUGET_PACKAGES_DIRECTORY: '.nuget'
+  SOURCE_CODE_PATH: '*/*/'
+
+cache:
+  key: $CI_JOB_STAGE-$CI_COMMIT_REF_SLUG
+  policy: pull-push
+  paths:
+    - $SOURCE_CODE_PATH$OBJECTS_DIRECTORY/project.assets.json
+    - $SOURCE_CODE_PATH$OBJECTS_DIRECTORY/*.csproj.nuget.*
+    - $NUGET_PACKAGES_DIRECTORY
+
+before_script:
+  - dotnet restore --packages $NUGET_PACKAGES_DIRECTORY
+   
+Format:
+  stage: format
+  script:
+    - dotnet format --no-restore ./Assignment.sln
+
+Build:
+  stage: build
+  script:
+    - dotnet build --no-restore ./Assignment.sln
+  

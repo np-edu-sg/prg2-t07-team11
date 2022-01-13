@@ -23,7 +23,7 @@ before_script:
 Format:
   stage: format
   script:
-    - dotnet format --no-restore ./Assignment.sln
+    - dotnet format --verify-no-changes --no-restore ./Assignment.sln
 
 Build:
   stage: build

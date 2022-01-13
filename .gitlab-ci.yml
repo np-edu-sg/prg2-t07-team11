@@ -23,10 +23,10 @@ before_script:
 Format:
   stage: format
   script:
-    - dotnet format --verify-no-changes --no-restore ./Assignment.sln
+    - dotnet format --verify-no-changes --no-restore ./PRG2_T07_Team11.sln
 
 Build:
   stage: build
   script:
-    - dotnet build --no-restore ./Assignment.sln
+    - dotnet build --no-restore ./PRG2_T07_Team11.sln
   

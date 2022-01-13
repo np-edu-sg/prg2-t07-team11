@@ -24,17 +24,11 @@ before_script:
 
 Format:
   stage: format
-  only:
-    - main
-    - merge_requests
   script:
     - dotnet format --verify-no-changes --no-restore ./PRG2_T07_Team11.sln
 
 Build:
   stage: build
-  only:
-    - main
-    - merge_requests
   script:
     - dotnet build --no-restore ./PRG2_T07_Team11.sln
   

@@ -11,7 +11,7 @@ variables:
 
 cache:
   key:
-    file:
+    files:
       - $SOURCE_CODE_PATH*.lock.json
   policy: pull-push
   paths:

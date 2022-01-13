@@ -1,7 +1,7 @@
 ﻿namespace Cli.Models
 {
-    public class Student: Ticket
+    public class Student : Ticket
     {
-        
+
     }
 }

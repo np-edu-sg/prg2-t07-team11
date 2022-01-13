@@ -1,7 +1,7 @@
 ﻿namespace Cli.Models
 {
-    public class Adult: Ticket
+    public class Adult : Ticket
     {
-        
+
     }
 }

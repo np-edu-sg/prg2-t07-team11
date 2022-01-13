@@ -27,5 +27,10 @@ namespace Cli.Models
         {
             return GenreList;
         }
+
+        public override string ToString()
+        {
+            return $"{Title,-20}{Duration,-10}{Classification,-20}{OpeningDate,-15}{ScreeningList,-12}";
+        }
     }
 }

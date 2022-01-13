@@ -10,7 +10,9 @@ variables:
   SOURCE_CODE_PATH: '*/*/'
 
 cache:
-  key: $CI_JOB_STAGE-$CI_COMMIT_REF_SLUG
+  key:
+    files:
+      - $SOURCE_CODE_PATH*.lock.json
   policy: pull-push
   paths:
     - $SOURCE_CODE_PATH$OBJECTS_DIRECTORY/project.assets.json
@@ -19,7 +21,7 @@ cache:
 
 before_script:
   - dotnet restore --packages $NUGET_PACKAGES_DIRECTORY
-   
+
 Format:
   stage: format
   script:

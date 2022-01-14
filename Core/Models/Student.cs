@@ -1,4 +1,4 @@
-﻿namespace Cli.Models
+﻿namespace Core.Models
 {
     public class Student : Ticket
     {

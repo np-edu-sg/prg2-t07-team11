@@ -1,23 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using Cli.Models;
+using System.Threading.Tasks;
+using Core.Repository;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Cli
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-        }
+            using var host = Host.CreateDefaultBuilder(args)
+                .ConfigureServices(services =>
+                {
+                    services
+                        .AddLogging(builder =>
+                        {
+                            builder.ClearProviders();
+                        })
+                        .AddSingleton(typeof(IMovie), _ => new Core.Repository.Csv.Movie("./Assets/Movie.csv"))
+                        .AddSingleton<Core.UseCase.Movie>()
+                        .AddSingleton<Movie>();
+                })
+                .Build();
 
-        public void ListAllMovies(List<Movie> movies)
-        {
-            foreach (var movie in movies)
-            {
-                Console.WriteLine(movie);
-            }
+            var movie = host.Services.GetRequiredService<Movie>();
+            movie.ListAllMovies();
+
+            await host.RunAsync();
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Core.Repository;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -28,8 +26,6 @@ namespace Cli
 
             var movie = host.Services.GetRequiredService<Movie>();
             movie.ListAllMovies();
-
-            await host.RunAsync();
         }
     }
 }

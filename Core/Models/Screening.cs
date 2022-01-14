@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Cli.Models
+namespace Core.Models
 {
     public class Screening
     {

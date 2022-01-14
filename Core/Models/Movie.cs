@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.VisualBasic;
 
-namespace Cli.Models
+namespace Core.Models
 {
     public class Movie
     {
@@ -9,23 +10,41 @@ namespace Cli.Models
         public int Duration { get; set; }
         public string Classification { get; set; }
         public DateTime OpeningDate { get; set; }
+        public List<Screening> ScreeningList { get; set; }
         public List<string> GenreList { get; set; }
-        public List<string> ScreeningList { get; set; }
 
-        public Movie() { }
+        public Movie()
+        {
+        }
 
-        public Movie(string title, int duration, string classification, DateTime openingDate, List<string> screeningList)
+        public Movie(
+            string title,
+            int duration,
+            string classification,
+            DateTime openingDate,
+            List<string> genreList
+        )
         {
             Title = title;
             Duration = duration;
             Classification = classification;
             OpeningDate = openingDate;
-            ScreeningList = screeningList;
+            GenreList = genreList;
         }
 
         public List<string> GetGenreList()
         {
             return GenreList;
+        }
+
+        public void AddScreening(Screening screening)
+        {
+            ScreeningList.Add(screening);
+        }
+
+        public List<Screening> GetScreeningList()
+        {
+            return ScreeningList;
         }
 
         public override string ToString()

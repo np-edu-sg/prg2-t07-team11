@@ -14,6 +14,13 @@ The solution contains 2 projects:
 * `Cli`: The CLI interface the user will be interfacing with
 * `Core`: All domain related stuff (i.e. Models, Repository Interfaces, etc)
 
+## IDisplay
+
+`IDisplay` is a display abstraction. There are 2 implementations: `BasicDisplay` and `InteractiveDisplay`:
+
+* `BasicDisplay`: The basic display, same as using Console
+* `InteractiveDisplay`: This is supposed to be a more interactive and GUI like display. I don't know if it works D:
+
 ## Cli project structure
 
 The `Cli` project is a .NET Console App. It also makes use of Dependency Injection to make my life easier... I think.

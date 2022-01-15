@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Cli.Display;
-using Core.Repository;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
+
+using Cli.Display;
+using Core.Repository;
 
 namespace Cli
 {

@@ -42,5 +42,17 @@ namespace Core.Repository.Csv
         {
             return _movies;
         }
+
+        public Models.Movie FindByTitle(string title)
+        {
+            foreach (var movie in _movies)
+            {
+                if (movie.Title == title)
+                {
+                    return movie;
+                }
+            }
+            return null;
+        }
     }
 }

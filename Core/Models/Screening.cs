@@ -23,5 +23,10 @@ namespace Core.Models
             Cinema = cinema;
             Movie = movie;
         }
+
+        public override string ToString()
+        {
+            return $"{ScreeningNo,-5}{ScreeningDateTime,-25}{ScreeningType,-5}{Cinema.Name,-20}{Movie.Title}";
+        }
     }
 }

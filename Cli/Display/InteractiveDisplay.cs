@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace Cli.Display
 {
@@ -24,7 +25,21 @@ namespace Cli.Display
 
         public void Text(object s)
         {
-            Console.WriteLine(s);
+            Text(s.ToString());
+        }
+
+        public void RootCommand(RootCommand command)
+        {
+            Console.Clear();
+            Console.SetCursorPosition(0, 0);
+            Console.BackgroundColor = ConsoleColor.DarkCyan;
+            Console.SetCursorPosition(0, 3);
+            Console.BackgroundColor = ConsoleColor.White;
+        }
+
+        public void Command(Command command)
+        {
+            throw new NotImplementedException();
         }
     }
 }

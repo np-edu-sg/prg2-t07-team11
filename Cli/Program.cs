@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
-
 using Cli.Display;
 using Core.Repository;
 
@@ -38,10 +37,19 @@ namespace Cli
                 })
                 .Build();
 
+
+            var display = host.Services.GetRequiredService<IDisplay>();
             var movie = host.Services.GetRequiredService<Movie>();
             var cinema = host.Services.GetRequiredService<Cinema>();
             movie.ListAllMovies();
             cinema.ListAllCinemas();
+
+            var root = new RootCommand(
+                "Programming 2 Assignment",
+                movie.Command
+            );
+            
+            display.RootCommand(root);
 
             await host.RunAsync();
         }

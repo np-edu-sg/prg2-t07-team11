@@ -6,7 +6,7 @@ namespace Core.Repository.Csv
 {
     public class Cinema : ICinema
     {
-        private readonly List<Core.Models.Cinema> _cinemas = new();
+        private readonly List<Models.Cinema> _cinemas = new();
 
         public Cinema(string path)
         {
@@ -14,11 +14,11 @@ namespace Core.Repository.Csv
 
             try
             {
-                string[] csvLines = File.ReadAllLines(path);
+                var csvLines = File.ReadAllLines(path);
                 foreach (var line in csvLines[1..])
                 {
-                    string[] data = line.Split(",");
-                    _cinemas.Add(new Core.Models.Cinema(
+                    var data = line.Split(",");
+                    _cinemas.Add(new Models.Cinema(
                         Convert.ToString(data[0]),
                         Convert.ToInt32(data[1]),
                         Convert.ToInt32(data[2])));
@@ -38,12 +38,8 @@ namespace Core.Repository.Csv
         public Models.Cinema FindByNameAndHallNo(string cinemaName, int hallNo)
         {
             foreach (var cinema in _cinemas)
-            {
-                if (cinema.Name == cinemaName & cinema.HallNo == hallNo)
-                {
+                if ((cinema.Name == cinemaName) & (cinema.HallNo == hallNo))
                     return cinema;
-                }
-            }
             return null;
         }
     }

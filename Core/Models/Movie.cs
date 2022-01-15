@@ -1,18 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.VisualBasic;
 
 namespace Core.Models
 {
     public class Movie
     {
-        public string Title { get; set; }
-        public int Duration { get; set; }
-        public string Classification { get; set; }
-        public DateTime OpeningDate { get; set; }
-        public List<Screening> ScreeningList { get; set; }
-        public List<string> GenreList { get; set; }
-
         public Movie()
         {
         }
@@ -31,6 +23,13 @@ namespace Core.Models
             OpeningDate = openingDate;
             GenreList = genreList;
         }
+
+        public string Title { get; set; }
+        public int Duration { get; set; }
+        public string Classification { get; set; }
+        public DateTime OpeningDate { get; set; }
+        public List<Screening> ScreeningList { get; set; }
+        public List<string> GenreList { get; set; }
 
         public List<string> GetGenreList()
         {

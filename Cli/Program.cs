@@ -1,6 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
+using Cli.Display;
+using Core.Repository;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,7 +14,7 @@ namespace Cli
 {
     internal class Program
     {
-        static async Task Main(string[] args)
+        private static async Task Main(string[] args)
         {
             var interactive = false;
             while (true)
@@ -35,7 +37,9 @@ namespace Cli
                         .AddHostedService(s => s.GetRequiredService<Window>())
                         .AddSingleton(typeof(IMovie), _ => new Core.Repository.Csv.Movie("./Assets/Movie.csv"))
                         .AddSingleton(typeof(ICinema), _ => new Core.Repository.Csv.Cinema("./Assets/Cinema.csv"))
-                        .AddSingleton(typeof(IScreening), s => new Core.Repository.Csv.Screening("./Assets/Screening.csv", s.GetRequiredService<IMovie>(), s.GetRequiredService<ICinema>()))
+                        .AddSingleton(typeof(IScreening),
+                            s => new Core.Repository.Csv.Screening("./Assets/Screening.csv",
+                                s.GetRequiredService<IMovie>(), s.GetRequiredService<ICinema>()))
                         .AddSingleton<Core.UseCase.Movie>()
                         .AddSingleton<Core.UseCase.Cinema>()
                         .AddSingleton<Core.UseCase.Screening>()

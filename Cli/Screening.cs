@@ -1,13 +1,12 @@
-﻿using System.Collections.Generic;
-using Cli.Display;
+﻿using Cli.Display;
 using Core.Repository;
 
 namespace Cli
 {
     public class Screening
     {
-        private readonly IScreening _screening;
         private readonly IDisplay _display;
+        private readonly IScreening _screening;
 
         public Screening(IScreening screening, IDisplay display)
         {

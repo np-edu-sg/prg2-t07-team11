@@ -6,19 +6,19 @@ namespace Core.Repository.Csv
 {
     public class Screening : IScreening
     {
-        private readonly List<Core.Models.Screening> _screenings = new();
+        private readonly List<Models.Screening> _screenings = new();
 
-        public Screening(string path, IMovie movie, ICinema cinema) 
+        public Screening(string path, IMovie movie, ICinema cinema)
         {
             if (string.IsNullOrWhiteSpace(path)) throw new Exception("Bad path");
 
             try
             {
-                string[] csvLines = File.ReadAllLines(path);
-                for (int i = 1; i < csvLines.Length; i++)
+                var csvLines = File.ReadAllLines(path);
+                for (var i = 1; i < csvLines.Length; i++)
                 {
-                    string[] data = csvLines[i].Split(",");
-                    _screenings.Add(new Core.Models.Screening(
+                    var data = csvLines[i].Split(",");
+                    _screenings.Add(new Models.Screening(
                         i,
                         DateTime.Parse(data[0]),
                         data[1],
@@ -32,7 +32,7 @@ namespace Core.Repository.Csv
                 throw new Exception("Failed to read file", ex);
             }
         }
-            
+
         public List<Models.Screening> Find()
         {
             return _screenings;

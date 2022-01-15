@@ -7,10 +7,11 @@ namespace Core.Repository
     {
         public List<Screening> Find();
     }
+
     public interface IScreeningWriter
     {
     }
-        
+
     public interface IScreening : IScreeningReader, IScreeningWriter
     {
     }

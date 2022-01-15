@@ -30,13 +30,18 @@ namespace Cli
                     services
                         .AddLogging(builder => { builder.ClearProviders(); })
                         .AddSingleton(typeof(IMovie), _ => new Core.Repository.Csv.Movie("./Assets/Movie.csv"))
+                        .AddSingleton(typeof(ICinema), _ => new Core.Repository.Csv.Cinema("./Assets/Cinema.csv"))
                         .AddSingleton<Core.UseCase.Movie>()
+                        .AddSingleton<Core.UseCase.Cinema>()
+                        .AddSingleton<Cinema>()
                         .AddSingleton<Movie>();
                 })
                 .Build();
 
             var movie = host.Services.GetRequiredService<Movie>();
+            var cinema = host.Services.GetRequiredService<Cinema>();
             movie.ListAllMovies();
+            cinema.ListAllCinemas();
 
             await host.RunAsync();
         }

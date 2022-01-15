@@ -16,5 +16,10 @@
             HallNo = hallNo;
             Capacity = capacity;
         }
+
+        public override string ToString()
+        {
+            return $"{Name,-15}{HallNo,-5}{Capacity,-5}";
+        }
     }
 }

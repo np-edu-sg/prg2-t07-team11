@@ -25,7 +25,7 @@ namespace Cli
                 {
                     if (interactive) services.AddSingleton<IDisplay, InteractiveDisplay>();
                     else services.AddSingleton<IDisplay, BasicDisplay>();
-                    
+
                     services
                         .AddLogging(builder => { builder.ClearProviders(); })
                         .AddSingleton(typeof(IMovie), _ => new Core.Repository.Csv.Movie("./Assets/Movie.csv"))
@@ -34,9 +34,6 @@ namespace Cli
                 })
                 .Build();
 
-            var display = host.Services.GetRequiredService<IDisplay>();
-            display.Text("Movie Booking...");
-            
             var movie = host.Services.GetRequiredService<Movie>();
             movie.ListAllMovies();
 

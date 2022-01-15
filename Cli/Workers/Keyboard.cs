@@ -8,7 +8,7 @@ namespace Cli.Workers
     {
         private Stream _stdInStream;
         private readonly IHost _host;
-        
+
         public Keyboard(IHost host)
         {
             _host = host;

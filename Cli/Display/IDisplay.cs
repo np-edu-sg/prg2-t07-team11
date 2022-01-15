@@ -6,5 +6,6 @@ namespace Cli.Display
     {
         public ConsoleKeyInfo ReadKey();
         public void Text(string s);
+        public void Text(object s);
     }
 }

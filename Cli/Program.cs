@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
 using Cli.Display;
+using Core.Models;
 using Core.Repository;
 
 namespace Cli
@@ -33,16 +35,23 @@ namespace Cli
                         .AddHostedService(s => s.GetRequiredService<Window>())
                         .AddSingleton(typeof(IMovie), _ => new Core.Repository.Csv.Movie("./Assets/Movie.csv"))
                         .AddSingleton(typeof(ICinema), _ => new Core.Repository.Csv.Cinema("./Assets/Cinema.csv"))
+                        .AddSingleton(typeof(IScreening), s => new Core.Repository.Csv.Screening("./Assets/Screening.csv", s.GetRequiredService<IMovie>(), s.GetRequiredService<ICinema>()))
                         .AddSingleton<Core.UseCase.Movie>()
                         .AddSingleton<Core.UseCase.Cinema>()
+                        .AddSingleton<Core.UseCase.Screening>()
+                        .AddSingleton<Movie>()
                         .AddSingleton<Cinema>()
-                        .AddSingleton<Movie>();
+                        .AddSingleton<Screening>();
                 })
                 .Build();
 
             var display = host.Services.GetRequiredService<IDisplay>();
             var movie = host.Services.GetRequiredService<Movie>();
             var cinema = host.Services.GetRequiredService<Cinema>();
+            var screening = host.Services.GetRequiredService<Screening>();
+            movie.ListAllMovies();
+            cinema.ListAllCinemas();
+            screening.ListAllScreenings();
 
             var root = new RootCommand(
                 "Programming 2 Assignment",

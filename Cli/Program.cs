@@ -24,7 +24,7 @@ namespace Cli
                 .ConfigureServices(services =>
                 {
                     services.AddSingleton<Window>();
-                    
+
                     if (interactive) services.AddSingleton<IDisplay, InteractiveDisplay>();
                     else services.AddSingleton<IDisplay, BasicDisplay>();
 

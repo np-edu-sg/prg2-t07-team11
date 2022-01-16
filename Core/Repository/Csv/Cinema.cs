@@ -35,12 +35,9 @@ namespace Core.Repository.Csv
             return _cinemas;
         }
 
-        public Models.Cinema FindByNameAndHallNo(string cinemaName, int hallNo)
+        public Models.Cinema FindOneByNameAndHallNo(string cinemaName, int hallNo)
         {
-            foreach (var cinema in _cinemas)
-                if ((cinema.Name == cinemaName) & (cinema.HallNo == hallNo))
-                    return cinema;
-            return null;
+            return _cinemas.Find(c => c.Name == cinemaName && c.HallNo == hallNo);
         }
     }
 }

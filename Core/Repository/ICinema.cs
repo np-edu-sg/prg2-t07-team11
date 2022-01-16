@@ -7,7 +7,7 @@ namespace Core.Repository
     {
         public List<Cinema> Find();
 
-        public Cinema FindByNameAndHallNo(string cinemaName, int hallNo);
+        public Cinema FindOneByNameAndHallNo(string cinemaName, int hallNo);
     }
 
     public interface ICinemaWriter

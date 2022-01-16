@@ -16,18 +16,21 @@ namespace Cli
             while (true)
             {
                 Console.Write("[B]asic or [I]nteractive mode: ");
-                if (Console.ReadLine() == "I") interactive = true;
+                if (Console.ReadLine()?.ToLower() == "i") interactive = true;
                 break;
             }
 
             using var host = Host.CreateDefaultBuilder(args)
                 .ConfigureServices(services =>
                 {
+                    services.AddSingleton<Window>();
+                    
                     if (interactive) services.AddSingleton<IDisplay, InteractiveDisplay>();
                     else services.AddSingleton<IDisplay, BasicDisplay>();
 
                     services
                         .AddLogging(builder => { builder.ClearProviders(); })
+                        .AddHostedService(s => s.GetRequiredService<Window>())
                         .AddSingleton(typeof(IMovie), _ => new Core.Repository.Csv.Movie("./Assets/Movie.csv"))
                         .AddSingleton(typeof(ICinema), _ => new Core.Repository.Csv.Cinema("./Assets/Cinema.csv"))
                         .AddSingleton<Core.UseCase.Movie>()
@@ -37,19 +40,17 @@ namespace Cli
                 })
                 .Build();
 
-
             var display = host.Services.GetRequiredService<IDisplay>();
             var movie = host.Services.GetRequiredService<Movie>();
             var cinema = host.Services.GetRequiredService<Cinema>();
-            movie.ListAllMovies();
-            cinema.ListAllCinemas();
 
             var root = new RootCommand(
                 "Programming 2 Assignment",
-                movie.Command
+                cinema.Commands,
+                movie.Commands
             );
-            
-            display.RootCommand(root);
+
+            display.Run(root);
 
             await host.RunAsync();
         }

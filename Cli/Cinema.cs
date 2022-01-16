@@ -1,4 +1,5 @@
-﻿using Cli.Display;
+﻿using System.Collections.Generic;
+using Cli.Display;
 using Core.Repository;
 
 namespace Cli
@@ -7,11 +8,14 @@ namespace Cli
     {
         private readonly ICinema _cinema;
         private readonly IDisplay _display;
+        public List<Command> Commands { get; set; } = new();
 
         public Cinema(ICinema cinema, IDisplay display)
         {
             _cinema = cinema;
             _display = display;
+
+            Commands.Add(new Command("List all cinemas", ListAllCinemas));
         }
 
         public void ListAllCinemas()

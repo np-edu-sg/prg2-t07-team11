@@ -1,16 +1,21 @@
 ﻿using System;
-using System.Threading.Tasks;
 
 namespace Cli.Display
 {
     public class InteractiveDisplay : IDisplay
     {
-        public InteractiveDisplay()
+        public InteractiveDisplay(Window window)
         {
+            window.ResizeEvent += OnResize;
+
             Console.BackgroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Black;
             Console.CursorVisible = false;
             Console.Clear();
+        }
+
+        private void OnResize(object caller, ResizeEventArgs resizeEventArgs)
+        {
         }
 
         public ConsoleKeyInfo ReadKey()
@@ -28,18 +33,29 @@ namespace Cli.Display
             Text(s.ToString());
         }
 
-        public void RootCommand(RootCommand command)
+        public void Header(string s)
         {
-            Console.Clear();
-            Console.SetCursorPosition(0, 0);
-            Console.BackgroundColor = ConsoleColor.DarkCyan;
-            Console.SetCursorPosition(0, 3);
-            Console.BackgroundColor = ConsoleColor.White;
+            Console.BackgroundColor = ConsoleColor.DarkBlue;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine();
+            var pad = " ";
+            for (var i = 0; i < Console.WindowWidth / 2 - s.Length / 2; i++) pad += " ";
+
+            Console.WriteLine(pad + s);
         }
 
-        public void Command(Command command)
+        public void Run(RootCommand rootCommand)
         {
-            throw new NotImplementedException();
+            Console.BackgroundColor = ConsoleColor.DarkCyan;
+            Console.Clear();
+
+            Console.WriteLine();
+            Header(rootCommand.Name);
+            Console.WriteLine();
+
+            Console.SetCursorPosition(0, 3);
+            Console.BackgroundColor = ConsoleColor.White;
+            for (var i = 0; i < Console.WindowHeight; i++) Console.WriteLine();
         }
     }
 }

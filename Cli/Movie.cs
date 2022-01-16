@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Cli.Display;
 using Core.Repository;
 
@@ -8,15 +9,14 @@ namespace Cli
     {
         private readonly IMovie _movie;
         private readonly IDisplay _display;
-        public Command Command { get; set; }
+        public List<Command> Commands { get; set; } = new();
 
         public Movie(IMovie movie, IDisplay display)
         {
             _movie = movie;
             _display = display;
-            
-            Command = new Command("Movies");
-            Command.AddCommand(new Command("List all movies", ListAllMovies));
+
+            Commands.Add(new Command("List all movies", ListAllMovies));
         }
 
         public void ListAllMovies()

@@ -20,40 +20,22 @@ namespace Cli.Display
             Text(s.ToString());
         }
 
-        private void CommandChild(List<Command> children, int level)
-        {
-            for (var idx = 0; idx < children.Count; idx++)
-            {
-                var pre = "";
-                for (var i = 0; i < level; i++) pre += "\t";
-                Console.WriteLine(pre + $"[{idx + 1}] {children[idx].Name}");
-
-                if (children[idx].Children is not null) CommandChild(children[idx].Children, level + 1);
-            }
-        }
-
-        public void RootCommand(RootCommand command)
+        public void Run(RootCommand rootCommand)
         {
             Console.Clear();
 
             var line = "";
-            for (var idx = 0; idx < command.Name.Length + 2; idx++) line += "-";
+            for (var idx = 0; idx < rootCommand.Name.Length + 2; idx++) line += "-";
 
             Console.WriteLine($"/{line}\\");
-            Console.WriteLine($"| {command.Name} |");
+            Console.WriteLine($"| {rootCommand.Name} |");
             Console.WriteLine($"\\{line}/");
             Console.WriteLine();
 
-            foreach (var child in command.Commands)
+            for (var idx = 0; idx < rootCommand.Commands.Count; idx++)
             {
-                Console.WriteLine(child.Name);
-                if (child.Children is not null) CommandChild(child.Children, 1);
+                Console.WriteLine($"[{idx + 1}] {rootCommand.Commands[idx].Name}");
             }
-        }
-
-        public void Command(Command command)
-        {
-            throw new NotImplementedException();
         }
     }
 }

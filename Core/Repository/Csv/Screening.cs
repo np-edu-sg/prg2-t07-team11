@@ -22,8 +22,8 @@ namespace Core.Repository.Csv
                         i,
                         DateTime.Parse(data[0]),
                         data[1],
-                        cinema.FindByNameAndHallNo(data[2], int.Parse(data[3])),
-                        movie.FindByTitle(data[4])
+                        cinema.FindOneByNameAndHallNo(data[2], int.Parse(data[3])),
+                        movie.FindOneByTitle(data[4])
                     ));
                 }
             }

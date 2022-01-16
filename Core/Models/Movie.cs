@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.VisualBasic;
 
 namespace Core.Models
 {
@@ -12,7 +11,6 @@ namespace Core.Models
         public DateTime OpeningDate { get; set; }
         public List<Screening> ScreeningList { get; set; }
         public List<string> GenreList { get; set; }
-
         public Movie()
         {
         }

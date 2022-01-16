@@ -15,15 +15,18 @@ namespace Core.Models
         {
         }
 
-        public Screening(int screeningNo, DateTime screeningDateTime, string screeningType, int seatsRemaining,
-            Cinema cinema, Movie movie)
+        public Screening(int screeningNo, DateTime screeningDateTime, string screeningType, Cinema cinema, Movie movie)
         {
             ScreeningNo = screeningNo;
             ScreeningDateTime = screeningDateTime;
             ScreeningType = screeningType;
-            SeatsRemaining = seatsRemaining;
             Cinema = cinema;
             Movie = movie;
+        }
+
+        public override string ToString()
+        {
+            return $"{ScreeningNo,-5}{ScreeningDateTime,-25}{ScreeningType,-5}{Cinema.Name,-20}{Movie.Title}";
         }
     }
 }

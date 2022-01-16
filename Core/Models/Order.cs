@@ -10,7 +10,6 @@ namespace Core.Models
         public double Amount { get; set; }
         public string Status { get; set; }
         public List<Ticket> TicketList { get; set; }
-
         public Order()
         {
         }

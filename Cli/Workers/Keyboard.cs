@@ -6,8 +6,8 @@ namespace Cli.Workers
 {
     public class Keyboard
     {
-        private Stream _stdInStream;
         private readonly IHost _host;
+        private Stream _stdInStream;
 
         public Keyboard(IHost host)
         {

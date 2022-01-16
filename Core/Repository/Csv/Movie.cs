@@ -7,7 +7,7 @@ namespace Core.Repository.Csv
 {
     public class Movie : IMovie
     {
-        private readonly List<Core.Models.Movie> _movies = new();
+        private readonly List<Models.Movie> _movies = new();
 
         public Movie(string path)
         {
@@ -23,7 +23,7 @@ namespace Core.Repository.Csv
 
                     foreach (var genre in split[2].Split("/")) genres.Add(genre);
 
-                    _movies.Add(new Core.Models.Movie(
+                    _movies.Add(new Models.Movie(
                         split[0],
                         int.Parse(split[1]),
                         split[3],
@@ -41,6 +41,11 @@ namespace Core.Repository.Csv
         public List<Models.Movie> Find()
         {
             return _movies;
+        }
+
+        public Models.Movie FindOneByTitle(string title)
+        {
+            return _movies.Find(m => m.Title == title);
         }
     }
 }

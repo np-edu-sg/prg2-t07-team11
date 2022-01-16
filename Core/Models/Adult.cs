@@ -3,7 +3,6 @@
     public class Adult : Ticket
     {
         public bool PopcornOffer { get; set; }
-
         public Adult()
         {
         }

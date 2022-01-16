@@ -3,7 +3,6 @@
     public class SeniorCitizen : Ticket
     {
         public int YearOfBirth { get; set; }
-
         public SeniorCitizen()
         {
         }

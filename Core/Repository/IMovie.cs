@@ -6,7 +6,7 @@ namespace Core.Repository
     public interface IMovieReader
     {
         public List<Movie> Find();
-        public Movie FindByTitle(string movieTitle);
+        public Movie FindOneByTitle(string movieTitle);
     }
 
     public interface IMovieWriter

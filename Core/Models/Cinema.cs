@@ -2,6 +2,9 @@
 {
     public class Cinema
     {
+        public string Name { get; set; }
+        public int HallNo { get; set; }
+        public int Capacity { get; set; }
         public Cinema()
         {
         }
@@ -12,10 +15,6 @@
             HallNo = hallNo;
             Capacity = capacity;
         }
-
-        public string Name { get; set; }
-        public int HallNo { get; set; }
-        public int Capacity { get; set; }
 
         public override string ToString()
         {

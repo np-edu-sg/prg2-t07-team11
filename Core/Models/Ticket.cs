@@ -2,6 +2,7 @@
 {
     public class Ticket
     {
+        public Screening Screening { get; set; }
         public Ticket()
         {
         }
@@ -10,8 +11,6 @@
         {
             Screening = screening;
         }
-
-        public Screening Screening { get; set; }
 
         public double CalculatePrice()
         {

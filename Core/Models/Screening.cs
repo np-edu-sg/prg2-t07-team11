@@ -4,6 +4,13 @@ namespace Core.Models
 {
     public class Screening
     {
+        public int ScreeningNo { get; set; }
+        public DateTime ScreeningDateTime { get; set; }
+        public string ScreeningType { get; set; }
+        public int SeatsRemaining { get; set; }
+        public Cinema Cinema { get; set; }
+        public Movie Movie { get; set; }
+
         public Screening()
         {
         }
@@ -16,14 +23,7 @@ namespace Core.Models
             Cinema = cinema;
             Movie = movie;
         }
-
-        public int ScreeningNo { get; set; }
-        public DateTime ScreeningDateTime { get; set; }
-        public string ScreeningType { get; set; }
-        public int SeatsRemaining { get; set; }
-        public Cinema Cinema { get; set; }
-        public Movie Movie { get; set; }
-
+        
         public override string ToString()
         {
             return $"{ScreeningNo,-5}{ScreeningDateTime,-25}{ScreeningType,-5}{Cinema.Name,-20}{Movie.Title}";

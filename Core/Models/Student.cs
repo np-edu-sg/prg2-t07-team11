@@ -2,6 +2,7 @@
 {
     public class Student : Ticket
     {
+        public string LevelOfStudy { get; set; }
         public Student()
         {
         }
@@ -10,7 +11,5 @@
         {
             LevelOfStudy = levelOfStudy;
         }
-
-        public string LevelOfStudy { get; set; }
     }
 }

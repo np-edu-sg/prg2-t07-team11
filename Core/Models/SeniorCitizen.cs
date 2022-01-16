@@ -2,6 +2,7 @@
 {
     public class SeniorCitizen : Ticket
     {
+        public int YearOfBirth { get; set; }
         public SeniorCitizen()
         {
         }
@@ -10,7 +11,5 @@
         {
             YearOfBirth = yearOfBirth;
         }
-
-        public int YearOfBirth { get; set; }
     }
 }

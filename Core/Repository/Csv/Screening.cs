@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 
 namespace Core.Repository.Csv
@@ -20,7 +21,7 @@ namespace Core.Repository.Csv
                     var data = csvLines[i].Split(",");
                     _screenings.Add(new Models.Screening(
                         i,
-                        DateTime.Parse(data[0]),
+                        DateTime.Parse(data[0], new CultureInfo("en-SG")),
                         data[1],
                         cinema.FindOneByNameAndHallNo(data[2], int.Parse(data[3])),
                         movie.FindOneByTitle(data[4])

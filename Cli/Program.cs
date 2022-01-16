@@ -53,6 +53,7 @@ namespace Cli
             var movie = host.Services.GetRequiredService<Movie>();
             var cinema = host.Services.GetRequiredService<Cinema>();
             var screening = host.Services.GetRequiredService<Screening>();
+
             movie.ListAllMovies();
             cinema.ListAllCinemas();
             screening.ListAllScreenings();
@@ -63,7 +64,8 @@ namespace Cli
                 movie.Commands
             );
 
-            display.Run(root);
+            // Uncomment to get interface
+            // display.Run(root);
 
             await host.RunAsync();
         }

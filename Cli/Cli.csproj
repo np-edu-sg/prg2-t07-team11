@@ -5,7 +5,7 @@
         <TargetFramework>net5.0</TargetFramework>
         <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
     </PropertyGroup>
-
+    
     <ItemGroup>
         <Content Include=".\Assets\**">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -24,10 +24,5 @@ namespace Core.Models
         {
             TicketList.Add(ticket);
         }
-
-        public List<Ticket> GetTicketList()
-        {
-            return TicketList;
-        }
     }
 }

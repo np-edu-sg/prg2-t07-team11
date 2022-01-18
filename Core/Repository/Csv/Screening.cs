@@ -19,13 +19,19 @@ namespace Core.Repository.Csv
                 for (var i = 1; i < csvLines.Length; i++)
                 {
                     var data = csvLines[i].Split(",");
-                    _screenings.Add(new Models.Screening(
+
+                    var m = movie.FindOneByTitle(data[4]);
+                    var c = cinema.FindOneByNameAndHallNo(data[2], int.Parse(data[3]));
+                    var screening = new Models.Screening(
                         i,
                         DateTime.Parse(data[0], new CultureInfo("en-SG")),
                         data[1],
-                        cinema.FindOneByNameAndHallNo(data[2], int.Parse(data[3])),
-                        movie.FindOneByTitle(data[4])
-                    ));
+                        c,
+                        m
+                    );
+
+                    m.AddScreening(screening);
+                    _screenings.Add(screening);
                 }
             }
             catch (Exception ex)

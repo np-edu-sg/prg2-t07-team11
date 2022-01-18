@@ -21,7 +21,8 @@ namespace Core.Repository.Csv
                     _cinemas.Add(new Models.Cinema(
                         Convert.ToString(data[0]),
                         Convert.ToInt32(data[1]),
-                        Convert.ToInt32(data[2])));
+                        Convert.ToInt32(data[2])
+                    ));
                 }
             }
             catch (Exception ex)

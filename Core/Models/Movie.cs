@@ -11,6 +11,7 @@ namespace Core.Models
         public DateTime OpeningDate { get; set; }
         public List<Screening> ScreeningList { get; set; }
         public List<string> GenreList { get; set; }
+
         public Movie()
         {
         }
@@ -30,19 +31,14 @@ namespace Core.Models
             GenreList = genreList;
         }
 
-        public List<string> GetGenreList()
+        public void AddGenre(string genre)
         {
-            return GenreList;
+            GenreList.Add(genre);
         }
 
         public void AddScreening(Screening screening)
         {
             ScreeningList.Add(screening);
-        }
-
-        public List<Screening> GetScreeningList()
-        {
-            return ScreeningList;
         }
 
         public override string ToString()

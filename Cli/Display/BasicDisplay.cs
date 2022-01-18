@@ -26,6 +26,7 @@ namespace Cli.Display
 
         public T Input<T>(string message)
         {
+            Console.Write(message);
             return (T)Convert.ChangeType(Console.ReadLine(), typeof(T));
         }
 

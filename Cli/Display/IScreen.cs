@@ -1,7 +1,15 @@
 ﻿namespace Cli.Display
 {
-    public interface IScreen
+    public abstract class Screen
     {
-        public void Render();
+        private readonly IDisplay _display;
+
+        public Screen(IDisplay display) => _display = display;
+        // display provids render helper functions
+
+        public virtual void Render()
+        {
+            // _display.newscreen or something
+        }
     }
 }

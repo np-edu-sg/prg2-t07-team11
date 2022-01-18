@@ -34,7 +34,7 @@ namespace Cli.Display
                 Console.WriteLine(error);
             }
 
-            return Input<T>(input);
+            return (T)Convert.ChangeType(input, typeof(T));
         }
 
         public T Input<T>(string message)

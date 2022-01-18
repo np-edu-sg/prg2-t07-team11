@@ -7,6 +7,7 @@ namespace Cli.Display
     {
         public ConsoleKeyInfo ReadKey();
         public T Input<T>(string message, string error, Predicate<string> validator);
+        public T Input<T>(string message);
         public void Text(string s);
         public void Text(object s);
         public void Run(RootCommand rootCommand);

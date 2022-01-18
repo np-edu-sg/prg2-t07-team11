@@ -21,7 +21,12 @@ namespace Cli.Display
                 Console.WriteLine(error);
             }
 
-            return (T)Convert.ChangeType(input, typeof(T));
+            return Input<T>(input);
+        }
+
+        public T Input<T>(string message)
+        {
+            return (T)Convert.ChangeType(Console.ReadLine(), typeof(T));
         }
 
         public void Text(string s)

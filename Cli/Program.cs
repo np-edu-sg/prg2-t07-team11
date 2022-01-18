@@ -69,6 +69,9 @@ namespace Cli
                     case 4:
                         screening.ListAllScreenings();
                         break;
+                    case 5:
+                        screening.AddScreening();
+                        break;
                 }
             }
         }

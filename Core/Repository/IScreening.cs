@@ -7,10 +7,13 @@ namespace Core.Repository
     {
         public void Init();
         public List<Screening> Find();
+
+        public List<Screening> FindByCinema(Cinema cinema);
     }
 
     public interface IScreeningWriter
     {
+        public void Add(Screening screening);
     }
 
     public interface IScreening : IScreeningReader, IScreeningWriter

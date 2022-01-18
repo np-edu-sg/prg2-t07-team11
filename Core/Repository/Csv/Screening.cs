@@ -55,12 +55,13 @@ namespace Core.Repository.Csv
 
         public List<Models.Screening> FindByCinema(Models.Cinema cinema)
         {
-            return _screenings.FindAll((s => s.Cinema == cinema));
+            return _screenings.FindAll(s => s.Cinema == cinema);
         }
 
         public void Add(Models.Screening screening)
         {
-            _screenings.Add(new Models.Screening(_screenings.Count+1,screening.ScreeningDateTime, screening.ScreeningType, screening.Cinema, screening.Movie));
+            _screenings.Add(new Models.Screening(_screenings.Count + 1, screening.ScreeningDateTime,
+                screening.ScreeningType, screening.Cinema, screening.Movie));
         }
     }
 }

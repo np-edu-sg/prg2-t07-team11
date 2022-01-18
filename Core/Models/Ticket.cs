@@ -3,6 +3,7 @@
     public class Ticket
     {
         public Screening Screening { get; set; }
+
         public Ticket()
         {
         }

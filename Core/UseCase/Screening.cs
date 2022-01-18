@@ -10,6 +10,7 @@ namespace Core.UseCase
         private readonly IScreening _screeningRepository;
         private readonly ICinema _cinemaRepository;
         private readonly IMovie _movieRepository;
+
         public Screening(IScreening screeningRepository, ICinema cinemaRepository, IMovie movieRepository)
         {
             _screeningRepository = screeningRepository;
@@ -30,25 +31,16 @@ namespace Core.UseCase
             var movie = _movieRepository.FindOneByTitle(movieTitle);
             var screening = _screeningRepository.FindByCinema(cinema);
             if (cinema is null) throw new Exception("Invalid cinema");
-            
-            if (dateTime <= movie.OpeningDate)
-            {
-                throw new Exception("Screening DateTime is before Movie OpeningDate");
-            }
 
-            if (screeningType != "2D" && screeningType != "3D")
-            {
-                throw new Exception("ScreeningType must be 2D or 3D");
-            }
+            if (dateTime <= movie.OpeningDate) throw new Exception("Screening DateTime is before Movie OpeningDate");
+
+            if (screeningType != "2D" && screeningType != "3D") throw new Exception("ScreeningType must be 2D or 3D");
 
             foreach (var s in screening)
-            {
                 if (s.ScreeningDateTime == dateTime)
-                {
                     throw new Exception("Cinema Hall Is Not Available");
-                }
-            }
-            _screeningRepository.Add(new Models.Screening(_screeningRepository.Find().Count + 1, dateTime, screeningType, cinema, movie));
+            _screeningRepository.Add(new Models.Screening(_screeningRepository.Find().Count + 1, dateTime,
+                screeningType, cinema, movie));
         }
     }
 }

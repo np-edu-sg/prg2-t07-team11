@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Cli.Display
 {
     public interface IDisplay
     {
         public ConsoleKeyInfo ReadKey();
+        public T Input<T>(string message, string error, Predicate<string> validator);
         public void Text(string s);
         public void Text(object s);
         public void Run(RootCommand rootCommand);

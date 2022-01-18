@@ -23,6 +23,20 @@ namespace Cli.Display
             return Console.ReadKey();
         }
 
+        public T Input<T>(string message, string error, Predicate<string> validator)
+        {
+            string input;
+            while (true)
+            {
+                Console.Write(message);
+                input = Console.ReadLine();
+                if (validator(input)) break;
+                Console.WriteLine(error);
+            }
+
+            return (T)Convert.ChangeType(input, typeof(T));
+        }
+
         public void Text(string s)
         {
             Console.WriteLine(s);

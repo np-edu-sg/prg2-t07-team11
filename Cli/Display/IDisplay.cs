@@ -10,6 +10,8 @@ namespace Cli.Display
         public T Input<T>(string message);
         public void Text(string s);
         public void Text(object s);
+        public void Render(Screen screen);
+        public void NavigateTo(Screen screen);
         public void Run(RootCommand rootCommand);
     }
 }

@@ -39,6 +39,7 @@ namespace Cli.Display
 
         public T Input<T>(string message)
         {
+            Console.Write(message);
             return (T)Convert.ChangeType(Console.ReadLine(), typeof(T));
         }
 
@@ -50,6 +51,16 @@ namespace Cli.Display
         public void Text(object s)
         {
             Text(s.ToString());
+        }
+
+        public void Render(Screen screen)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void NavigateTo(Screen screen)
+        {
+            throw new NotImplementedException();
         }
 
         public void Header(string s)

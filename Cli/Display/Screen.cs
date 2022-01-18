@@ -7,9 +7,7 @@
         public Screen(IDisplay display) => _display = display;
         // display provids render helper functions
 
-        public virtual void Render()
-        {
-            // _display.newscreen or something
-        }
+        // _display.newscreen or something
+        public abstract void Render();
     }
 }

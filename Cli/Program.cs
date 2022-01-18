@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
 using Cli.Display;
+using Cli.Extensions;
 using Core.Models;
 using Core.Repository;
 
@@ -35,14 +36,9 @@ namespace Cli
                     services
                         .AddLogging(builder => { builder.ClearProviders(); })
                         .AddHostedService(s => s.GetRequiredService<Window>())
-                        .AddSingleton(typeof(IMovie), _ => new Core.Repository.Csv.Movie("./Assets/Movie.csv"))
-                        .AddSingleton(typeof(ICinema), _ => new Core.Repository.Csv.Cinema("./Assets/Cinema.csv"))
-                        .AddSingleton(typeof(IScreening),
-                            s => new Core.Repository.Csv.Screening("./Assets/Screening.csv",
-                                s.GetRequiredService<IMovie>(), s.GetRequiredService<ICinema>()))
-                        .AddSingleton<Core.UseCase.Movie>()
-                        .AddSingleton<Core.UseCase.Cinema>()
-                        .AddSingleton<Core.UseCase.Screening>()
+                        .AddScreens()
+                        .AddRepositories()
+                        .AddUseCases()
                         .AddSingleton<Movie>()
                         .AddSingleton<Cinema>()
                         .AddSingleton<Screening>();

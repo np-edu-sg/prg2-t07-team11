@@ -40,6 +40,16 @@ namespace Cli.Display
             Text(s.ToString());
         }
 
+        public void Render(Screen screen)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void NavigateTo(Screen screen)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Run(RootCommand rootCommand)
         {
             Console.Clear();

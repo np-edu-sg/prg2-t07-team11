@@ -10,14 +10,14 @@ namespace Cli
     {
         private readonly IDisplay _display;
         private readonly IMovie _movie;
-        public List<Command> Commands { get; set; } = new();
+        public List<LegacyCommand> Commands { get; set; } = new();
 
         public Movie(IMovie movie, IDisplay display)
         {
             _movie = movie;
             _display = display;
 
-            Commands.Add(new Command("List all movies", ListAllMovies));
+            Commands.Add(new LegacyCommand("List all movies", ListAllMovies));
         }
 
         public void ListAllMovies()

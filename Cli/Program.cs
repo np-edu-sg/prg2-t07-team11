@@ -15,6 +15,7 @@ namespace Cli
 {
     internal class Program
     {
+        [Obsolete]
         private static async Task Main(string[] args)
         {
             var interactive = false;

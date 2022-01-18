@@ -50,6 +50,7 @@ namespace Cli.Display
             throw new NotImplementedException();
         }
 
+        [Obsolete]
         public void Run(RootCommand rootCommand)
         {
             Console.Clear();

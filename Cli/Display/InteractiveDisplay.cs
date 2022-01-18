@@ -74,6 +74,7 @@ namespace Cli.Display
             Console.WriteLine(pad + s);
         }
 
+        [Obsolete]
         public void Run(RootCommand rootCommand)
         {
             Console.BackgroundColor = ConsoleColor.DarkCyan;

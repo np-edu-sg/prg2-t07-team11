@@ -10,8 +10,11 @@ namespace Cli
     {
         private readonly IDisplay _display;
         private readonly IMovie _movie;
+
+        [Obsolete]
         public List<LegacyCommand> Commands { get; set; } = new();
 
+        [Obsolete]
         public Movie(IMovie movie, IDisplay display)
         {
             _movie = movie;

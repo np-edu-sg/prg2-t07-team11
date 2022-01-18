@@ -8,8 +8,11 @@ namespace Cli
     {
         private readonly ICinema _cinema;
         private readonly IDisplay _display;
+
+        [System.Obsolete]
         public List<LegacyCommand> Commands { get; set; } = new();
 
+        [System.Obsolete]
         public Cinema(ICinema cinema, IDisplay display)
         {
             _cinema = cinema;

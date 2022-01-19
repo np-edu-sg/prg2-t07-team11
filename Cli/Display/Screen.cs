@@ -2,12 +2,9 @@
 {
     public abstract class Screen
     {
-        private readonly IDisplay _display;
-
-        public Screen(IDisplay display) => _display = display;
-        // display provids render helper functions
-
-        // _display.newscreen or something
-        public abstract void Render();
+        public readonly IDisplay Display;
+        public Screen(IDisplay display) => Display = display;
+        public abstract void Mount();
+        public abstract void Unmount();
     }
 }

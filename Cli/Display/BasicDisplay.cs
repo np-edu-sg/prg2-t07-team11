@@ -1,10 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Cli.Display
 {
     public class BasicDisplay : IDisplay
     {
+        public void Line()
+        {
+            Console.WriteLine(new string(' ', Console.WindowWidth));
+        }
+
         public ConsoleKeyInfo ReadKey()
         {
             return Console.ReadKey();
@@ -40,14 +44,16 @@ namespace Cli.Display
             Text(s.ToString());
         }
 
-        public void Render(Screen screen)
+        public void Header(string s)
         {
-            throw new NotImplementedException();
+            Text(s);
+            Console.WriteLine();
         }
 
-        public void NavigateTo(Screen screen)
+        public void Mount(Screen screen)
         {
-            throw new NotImplementedException();
+            Console.Clear();
+            screen.Mount();
         }
 
         [Obsolete]

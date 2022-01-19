@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
 using Cli.Display;
+using Cli.Display.Screens;
 using Cli.Extensions;
 using Core.Models;
 using Core.Repository;
@@ -47,19 +48,16 @@ namespace Cli
                 .Build();
 
             var display = host.Services.GetRequiredService<IDisplay>();
-            var movie = host.Services.GetRequiredService<Movie>();
-            var cinema = host.Services.GetRequiredService<Cinema>();
-            var screening = host.Services.GetRequiredService<Screening>();
+            var entry = host.Services.GetRequiredService<EntryScreen>();
+            // var movie = host.Services.GetRequiredService<Movie>();
+            // var cinema = host.Services.GetRequiredService<Cinema>();
+            // var screening = host.Services.GetRequiredService<Screening>();
+            //
+            // movie.ListAllMovies();
+            // cinema.ListAllCinemas();
+            // screening.ListAllScreenings();
 
-            movie.ListAllMovies();
-            cinema.ListAllCinemas();
-            screening.ListAllScreenings();
-
-            var root = new RootCommand(
-                "Programming 2 Assignment",
-                cinema.Commands,
-                movie.Commands
-            );
+            display.Mount(entry);
 
             // Uncomment to get interface
             // display.Run(root);

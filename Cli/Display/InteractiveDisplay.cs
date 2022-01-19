@@ -4,18 +4,25 @@ namespace Cli.Display
 {
     public class InteractiveDisplay : IDisplay
     {
+        private const ConsoleColor BackgroundColor = ConsoleColor.Black;
+        private const ConsoleColor ForegroundColor = ConsoleColor.White;
+
+        private Screen _current;
+
         public InteractiveDisplay(Window window)
         {
             window.ResizeEvent += OnResize;
-
-            Console.BackgroundColor = ConsoleColor.White;
-            Console.ForegroundColor = ConsoleColor.Black;
-            Console.CursorVisible = false;
             Console.Clear();
         }
 
         private void OnResize(object caller, ResizeEventArgs resizeEventArgs)
         {
+            if (_current is not null) Mount(_current);
+        }
+
+        public void Line()
+        {
+            Console.Write(new string(' ', Console.WindowWidth));
         }
 
         public ConsoleKeyInfo ReadKey()
@@ -53,25 +60,31 @@ namespace Cli.Display
             Text(s.ToString());
         }
 
-        public void Render(Screen screen)
+        public void Mount(Screen screen)
         {
-            throw new NotImplementedException();
-        }
-
-        public void NavigateTo(Screen screen)
-        {
-            throw new NotImplementedException();
+            if (screen.GetType() != _current?.GetType()) _current = screen;
+            Console.Clear();
+            Console.SetCursorPosition(0, 0);
+            screen.Mount();
         }
 
         public void Header(string s)
         {
             Console.BackgroundColor = ConsoleColor.DarkBlue;
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine();
-            var pad = " ";
+
+            Line();
+            var pad = "";
             for (var i = 0; i < Console.WindowWidth / 2 - s.Length / 2; i++) pad += " ";
 
-            Console.WriteLine(pad + s);
+            var right = "";
+            for (var i = 0; i < Console.WindowWidth - pad.Length - s.Length; i++) right += " ";
+            
+            Console.Write(pad + s + right);
+            Line();
+
+            Console.BackgroundColor = BackgroundColor;
+            Console.ForegroundColor = ForegroundColor;
         }
 
         [Obsolete]

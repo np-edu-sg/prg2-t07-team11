@@ -1,4 +1,6 @@
-﻿namespace Cli.Display.Screens
+﻿using System;
+
+namespace Cli.Display.Screens
 {
     public class EntryScreen : Screen
     {
@@ -6,9 +8,13 @@
         {
         }
 
-        public override void Render()
+        public override void Mount()
         {
+            Display.Header("Movie Booking");
+        }
 
+        public override void Unmount()
+        {
         }
     }
 }

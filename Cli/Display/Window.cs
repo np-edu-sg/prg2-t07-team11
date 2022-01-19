@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
@@ -29,18 +30,15 @@ namespace Cli.Display
             Height = args.Height;
         }
 
-        protected override Task ExecuteAsync(CancellationToken stoppingToken)
+        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                Task.Delay(TimeSpan.FromMilliseconds(500), stoppingToken);
-                if (Width != Console.WindowWidth || Height != Console.WindowHeight)
-                {
-                    ResizeEvent?.Invoke(this, new ResizeEventArgs(Console.WindowWidth, Console.WindowHeight));
-                }
+                await Task.Delay(TimeSpan.FromMilliseconds(100), stoppingToken);
+                
+                if (Width == Console.WindowWidth && Height == Console.WindowHeight) continue;
+                ResizeEvent?.Invoke(this, new ResizeEventArgs(Console.WindowWidth, Console.WindowHeight));
             }
-
-            return Task.CompletedTask;
         }
     }
 }

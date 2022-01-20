@@ -25,7 +25,11 @@ namespace Core.Repository.Csv
                     var data = csvLines[i].Split(",");
 
                     var m = _movie.FindOneByTitle(data[4]);
+                    if (m is null) throw new Exception("Movie not found");
+                    
                     var c = _cinema.FindOneByNameAndHallNo(data[2], int.Parse(data[3]));
+                    if (c is null) throw new Exception("Cinema not found");
+                    
                     var screening = new Models.Screening(
                         i,
                         DateTime.Parse(data[0], new CultureInfo("en-SG")),

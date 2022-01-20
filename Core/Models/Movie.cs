@@ -12,6 +12,9 @@ namespace Core.Models
         public List<Screening> ScreeningList { get; set; } = new();
         public List<string> GenreList { get; set; } = new();
 
+        public static readonly string Header =
+            $"{"Title",-30}{"Duration",-10}{"Classification",-10}{"Opening Date",-15}";
+
         public Movie()
         {
         }
@@ -43,7 +46,7 @@ namespace Core.Models
 
         public override string ToString()
         {
-            return $"{Title,-30}{Duration,-10}{Classification,-10}{OpeningDate,-15}{ScreeningList,-12}";
+            return $"{Title,-30}{Duration,-10}{Classification,-10}{OpeningDate,-15}";
         }
     }
 }

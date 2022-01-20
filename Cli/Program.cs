@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Cli.Display;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,9 +11,10 @@ namespace Cli
 {
     internal class Program
     {
-        [Obsolete]
-        private static async Task Main(string[] args)
+        private static void Main(string[] args)
         {
+            Console.WriteLine("Movieeeeeeee");
+            
             using var host = Host.CreateDefaultBuilder(args)
                 .ConfigureServices(services =>
                 {
@@ -27,18 +29,48 @@ namespace Cli
                 })
                 .Build();
 
+            var rootMenu = new List<string>
+            {
+                "Load Movie and Cinema Data",
+                "Load Screening Data",
+                "List all movies",
+                "List movie screenings",
+                "Add a movie screening session",
+                "Delete a movie screening session",
+                "Order movie tickets",
+                "Cancel order of ticket",
+                "Recommend movies",
+                "Display available seats of screening session",
+                "Start Web API",
+            };
+
+            var display = host.Services.GetRequiredService<IDisplay>();
             var movie = host.Services.GetRequiredService<Movie>();
-            movie.LoadData();
             var cinema = host.Services.GetRequiredService<Cinema>();
-            cinema.LoadData();
             var screening = host.Services.GetRequiredService<Screening>();
-            screening.LoadData();
 
-            movie.ListAllMovies();
-            cinema.ListAllCinemas();
-            screening.ListAllScreenings();
+            while (true)
+            {
+                var option = display.Menu(rootMenu, "Enter your option: ", "Please enter a valid option");
+                Console.WriteLine();
 
-            await host.RunAsync();
+                switch (option)
+                {
+                    case 1:
+                        movie.LoadData();
+                        cinema.LoadData();
+                        break;
+                    case 2:
+                        screening.LoadData();
+                        break;
+                    case 3:
+                        movie.ListAllMovies();
+                        break;
+                    case 4:
+                        screening.ListAllScreenings();
+                        break;
+                }
+            }
         }
     }
 }

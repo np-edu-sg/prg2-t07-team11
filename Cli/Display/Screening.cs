@@ -13,7 +13,11 @@ namespace Cli.Display
             _display = display;
         }
 
-        public void LoadData() => _screening.LoadData();
+        public void LoadData()
+        {
+            _screening.LoadData();
+            _display.Text("Loaded screening data!");
+        }
 
         public void ListAllScreenings()
         {

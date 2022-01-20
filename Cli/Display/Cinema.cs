@@ -13,7 +13,11 @@ namespace Cli.Display
             _display = display;
         }
 
-        public void LoadData() => _cinema.LoadData();
+        public void LoadData()
+        {
+            _cinema.LoadData();
+            _display.Text("Loaded cinema data!");
+        }
 
         public void ListAllCinemas()
         {

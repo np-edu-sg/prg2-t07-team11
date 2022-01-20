@@ -14,7 +14,7 @@ namespace Cli
         private static void Main(string[] args)
         {
             Console.WriteLine("Movieeeeeeee");
-            
+
             using var host = Host.CreateDefaultBuilder(args)
                 .ConfigureServices(services =>
                 {

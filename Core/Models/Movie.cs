@@ -11,7 +11,7 @@ namespace Core.Models
         public DateTime OpeningDate { get; set; }
         public List<Screening> ScreeningList { get; set; } = new();
         public List<string> GenreList { get; set; } = new();
-        
+
         public static readonly string Header =
             $"{"Title",-30}{"Duration",-10}{"Classification",-10}{"Opening Date",-15}";
         public Movie()

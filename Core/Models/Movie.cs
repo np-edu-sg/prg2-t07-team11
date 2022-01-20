@@ -9,8 +9,8 @@ namespace Core.Models
         public int Duration { get; set; }
         public string Classification { get; set; }
         public DateTime OpeningDate { get; set; }
-        public List<Screening> ScreeningList { get; set; }
-        public List<string> GenreList { get; set; }
+        public List<Screening> ScreeningList { get; set; } = new();
+        public List<string> GenreList { get; set; } = new();
 
         public Movie()
         {

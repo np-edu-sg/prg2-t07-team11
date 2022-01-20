@@ -12,6 +12,8 @@ namespace Core.UseCase
             _screeningRepository = screeningRepository;
         }
 
+        public void LoadData() => _screeningRepository.Init();
+
         public List<Models.Screening> Find()
         {
             return _screeningRepository.Find();

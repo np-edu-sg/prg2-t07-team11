@@ -6,15 +6,21 @@ namespace Core.Repository.Csv
 {
     public class Cinema : ICinema
     {
+        private readonly string _path;
         private readonly List<Models.Cinema> _cinemas = new();
 
         public Cinema(string path)
         {
-            if (string.IsNullOrWhiteSpace(path)) throw new Exception("Bad path");
+            _path = path;
+        }
+
+        public void Init()
+        {
+            if (string.IsNullOrWhiteSpace(_path)) throw new Exception("Bad path");
 
             try
             {
-                var csvLines = File.ReadAllLines(path);
+                var csvLines = File.ReadAllLines(_path);
                 foreach (var line in csvLines[1..])
                 {
                     var data = line.Split(",");

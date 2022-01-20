@@ -1,16 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Cli.Display;
-using Core.Repository;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.DependencyInjection;
-using Cli.Display;
-using Cli.Display.Screens;
 using Cli.Extensions;
-using Core.Models;
-using Core.Repository;
 
 namespace Cli
 {
@@ -19,48 +13,30 @@ namespace Cli
         [Obsolete]
         private static async Task Main(string[] args)
         {
-            var interactive = false;
-            while (true)
-            {
-                Console.Write("[B]asic or [I]nteractive mode: ");
-                if (Console.ReadLine()?.ToLower() == "i") interactive = true;
-                break;
-            }
-
             using var host = Host.CreateDefaultBuilder(args)
                 .ConfigureServices(services =>
                 {
-                    services.AddSingleton<Window>();
-
-                    if (interactive) services.AddSingleton<IDisplay, InteractiveDisplay>();
-                    else services.AddSingleton<IDisplay, BasicDisplay>();
-
                     services
                         .AddLogging(builder => { builder.ClearProviders(); })
-                        .AddHostedService(s => s.GetRequiredService<Window>())
-                        .AddScreens()
                         .AddRepositories()
                         .AddUseCases()
+                        .AddSingleton<IDisplay, ConsoleDisplay>()
                         .AddSingleton<Movie>()
                         .AddSingleton<Cinema>()
                         .AddSingleton<Screening>();
                 })
                 .Build();
 
-            var display = host.Services.GetRequiredService<IDisplay>();
-            var entry = host.Services.GetRequiredService<EntryScreen>();
-            // var movie = host.Services.GetRequiredService<Movie>();
-            // var cinema = host.Services.GetRequiredService<Cinema>();
-            // var screening = host.Services.GetRequiredService<Screening>();
-            //
-            // movie.ListAllMovies();
-            // cinema.ListAllCinemas();
-            // screening.ListAllScreenings();
+            var movie = host.Services.GetRequiredService<Movie>();
+            movie.LoadData();
+            var cinema = host.Services.GetRequiredService<Cinema>();
+            cinema.LoadData();
+            var screening = host.Services.GetRequiredService<Screening>();
+            screening.LoadData();
 
-            display.Mount(entry);
-
-            // Uncomment to get interface
-            // display.Run(root);
+            movie.ListAllMovies();
+            cinema.ListAllCinemas();
+            screening.ListAllScreenings();
 
             await host.RunAsync();
         }

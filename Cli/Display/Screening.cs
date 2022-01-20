@@ -1,18 +1,19 @@
-﻿using Cli.Display;
-using Core.Repository;
+﻿using Core.Repository;
 
-namespace Cli
+namespace Cli.Display
 {
     public class Screening
     {
         private readonly IDisplay _display;
-        private readonly IScreening _screening;
+        private readonly Core.UseCase.Screening _screening;
 
-        public Screening(IScreening screening, IDisplay display)
+        public Screening(Core.UseCase.Screening screening, IDisplay display)
         {
             _screening = screening;
             _display = display;
         }
+
+        public void LoadData() => _screening.LoadData();
 
         public void ListAllScreenings()
         {

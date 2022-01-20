@@ -5,6 +5,7 @@ namespace Core.Repository
 {
     public interface IScreeningReader
     {
+        public void Init();
         public List<Screening> Find();
     }
 

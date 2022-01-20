@@ -12,6 +12,8 @@ namespace Core.UseCase
             _movieRepository = movieRepository;
         }
 
+        public void LoadData() => _movieRepository.Init();
+
         public List<Models.Movie> Find()
         {
             return _movieRepository.Find();

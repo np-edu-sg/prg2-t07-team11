@@ -7,15 +7,18 @@ namespace Core.Repository.Csv
 {
     public class Movie : IMovie
     {
+        private readonly string _path;
         private readonly List<Models.Movie> _movies = new();
 
-        public Movie(string path)
+        public Movie(string path) => _path = path;
+
+        public void Init()
         {
-            if (string.IsNullOrWhiteSpace(path)) throw new Exception("Bad path");
+            if (string.IsNullOrWhiteSpace(_path)) throw new Exception("Bad path");
 
             try
             {
-                var file = File.ReadAllLines(path);
+                var file = File.ReadAllLines(_path);
                 foreach (var line in file[1..])
                 {
                     var split = line.Split(",");

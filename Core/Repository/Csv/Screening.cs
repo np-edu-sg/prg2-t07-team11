@@ -26,10 +26,10 @@ namespace Core.Repository.Csv
 
                     var m = _movie.FindOneByTitle(data[4]);
                     if (m is null) throw new Exception("Movie not found");
-                    
+
                     var c = _cinema.FindOneByNameAndHallNo(data[2], int.Parse(data[3]));
                     if (c is null) throw new Exception("Cinema not found");
-                    
+
                     var screening = new Models.Screening(
                         i,
                         DateTime.Parse(data[0], new CultureInfo("en-SG")),
@@ -41,6 +41,7 @@ namespace Core.Repository.Csv
                     m.AddScreening(screening);
                     _screenings.Add(screening);
                 }
+
             }
             catch (Exception ex)
             {
@@ -51,6 +52,17 @@ namespace Core.Repository.Csv
         public List<Models.Screening> Find()
         {
             return _screenings;
+        }
+
+        public List<Models.Screening> FindByCinema(Models.Cinema cinema)
+        {
+            return _screenings.FindAll(s => s.Cinema == cinema);
+        }
+
+        public void Add(Models.Screening screening)
+        {
+            _screenings.Add(new Models.Screening(_screenings.Count + 1, screening.ScreeningDateTime,
+                screening.ScreeningType, screening.Cinema, screening.Movie));
         }
     }
 }

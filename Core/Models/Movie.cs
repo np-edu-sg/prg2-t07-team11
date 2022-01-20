@@ -14,7 +14,6 @@ namespace Core.Models
 
         public static readonly string Header =
             $"{"Title",-30}{"Duration",-10}{"Classification",-10}{"Opening Date",-15}";
-
         public Movie()
         {
         }
@@ -46,7 +45,7 @@ namespace Core.Models
 
         public override string ToString()
         {
-            return $"{Title,-30}{Duration,-10}{Classification,-10}{OpeningDate,-15}";
+            return $"{Title,-30}{Duration,-10}{Classification,-15}{OpeningDate,-15}";
         }
     }
 }

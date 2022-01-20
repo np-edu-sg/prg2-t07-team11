@@ -3,6 +3,7 @@
     public class Student : Ticket
     {
         public string LevelOfStudy { get; set; }
+
         public Student()
         {
         }

@@ -14,7 +14,7 @@ namespace Cli
         private static void Main(string[] args)
         {
             Console.WriteLine("Movieeeeeeee");
-            
+
             using var host = Host.CreateDefaultBuilder(args)
                 .ConfigureServices(services =>
                 {
@@ -68,6 +68,9 @@ namespace Cli
                         break;
                     case 4:
                         screening.ListAllScreenings();
+                        break;
+                    case 5:
+                        screening.AddScreening();
                         break;
                 }
             }

@@ -1,4 +1,4 @@
-﻿using Core.Repository;
+using Core.Repository;
 
 namespace Cli.Display
 {

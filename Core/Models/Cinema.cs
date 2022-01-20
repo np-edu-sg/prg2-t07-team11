@@ -5,6 +5,7 @@
         public string Name { get; set; }
         public int HallNo { get; set; }
         public int Capacity { get; set; }
+
         public Cinema()
         {
         }

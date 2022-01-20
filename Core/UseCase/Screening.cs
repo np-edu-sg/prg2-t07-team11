@@ -29,7 +29,7 @@ namespace Core.UseCase
         {
             var cinema = _cinemaRepository.FindOneByNameAndHallNo(cinemaName, cinemaHallNo);
             var movie = _movieRepository.FindOneByTitle(movieTitle);
-            var movieDuration = new TimeSpan(0, movie.Duration, 0 ,0 );
+            var movieDuration = new TimeSpan(0, movie.Duration, 0, 0);
             var screening = _screeningRepository.FindByCinema(cinema);
             var cleaningTime = new TimeSpan(0, 0, 30, 0);
             if (cinema is null) throw new Exception("Invalid cinema");

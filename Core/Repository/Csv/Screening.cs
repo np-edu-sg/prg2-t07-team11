@@ -41,6 +41,7 @@ namespace Core.Repository.Csv
                     m.AddScreening(screening);
                     _screenings.Add(screening);
                 }
+                
             }
             catch (Exception ex)
             {

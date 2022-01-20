@@ -29,16 +29,22 @@ namespace Core.UseCase
         {
             var cinema = _cinemaRepository.FindOneByNameAndHallNo(cinemaName, cinemaHallNo);
             var movie = _movieRepository.FindOneByTitle(movieTitle);
+            var movieDuration = new TimeSpan(0, movie.Duration, 0 ,0 );
             var screening = _screeningRepository.FindByCinema(cinema);
+            var cleaningTime = new TimeSpan(0, 0, 30, 0);
             if (cinema is null) throw new Exception("Invalid cinema");
 
-            if (dateTime <= movie.OpeningDate) throw new Exception("Screening DateTime is before Movie OpeningDate");
+            if (dateTime < movie.OpeningDate) throw new Exception("Screening DateTime is before Movie OpeningDate");
 
-            if (screeningType != "2D" && screeningType != "3D") throw new Exception("ScreeningType must be 2D or 3D");
+            if (screeningType is not "2D" or "3D") throw new Exception("ScreeningType must be 2D or 3D");
 
             foreach (var s in screening)
-                if (s.ScreeningDateTime == dateTime)
+            {
+                if (s.ScreeningDateTime == dateTime || s.ScreeningDateTime + movieDuration + cleaningTime > dateTime)
+                {
                     throw new Exception("Cinema Hall Is Not Available");
+                }
+            }
             _screeningRepository.Add(new Models.Screening(_screeningRepository.Find().Count + 1, dateTime,
                 screeningType, cinema, movie));
         }

@@ -39,12 +39,12 @@ namespace Core.UseCase
             if (dateTime < movie.OpeningDate) throw new Exception("Screening DateTime is before Movie OpeningDate");
 
             if (screeningType is not "2D" or "3D") throw new Exception("ScreeningType must be 2D or 3D");
-            
+
             foreach (var s in screening)
             {
                 if (s.ScreeningDateTime.Date == dateTime.Date)
                 {
-                    Console.WriteLine(endDateTime);
+                    var screeningEndDateTime = s.ScreeningDateTime + movieDuration + cleaningTime;
                     if (endDateTime > s.ScreeningDateTime || (dateTime > s.ScreeningDateTime && dateTime <= screeningEndDateTime))
                     {
                         throw new Exception("Cinema Hall Is Not Available");

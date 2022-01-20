@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using Core.Repository;
 
@@ -29,20 +30,25 @@ namespace Core.UseCase
         {
             var cinema = _cinemaRepository.FindOneByNameAndHallNo(cinemaName, cinemaHallNo);
             var movie = _movieRepository.FindOneByTitle(movieTitle);
-            var movieDuration = new TimeSpan(0, movie.Duration, 0, 0);
+            var movieDuration = TimeSpan.FromMinutes(movie.Duration);
             var screening = _screeningRepository.FindByCinema(cinema);
             var cleaningTime = new TimeSpan(0, 0, 30, 0);
+            var endDateTime = dateTime + movieDuration + cleaningTime;
             if (cinema is null) throw new Exception("Invalid cinema");
 
             if (dateTime < movie.OpeningDate) throw new Exception("Screening DateTime is before Movie OpeningDate");
 
             if (screeningType is not "2D" or "3D") throw new Exception("ScreeningType must be 2D or 3D");
-
+            
             foreach (var s in screening)
             {
-                if (s.ScreeningDateTime == dateTime || s.ScreeningDateTime + movieDuration + cleaningTime > dateTime)
+                if (s.ScreeningDateTime.Date == dateTime.Date)
                 {
-                    throw new Exception("Cinema Hall Is Not Available");
+                    Console.WriteLine(endDateTime);
+                    if (endDateTime > s.ScreeningDateTime || (dateTime > s.ScreeningDateTime && dateTime <= screeningEndDateTime))
+                    {
+                        throw new Exception("Cinema Hall Is Not Available");
+                    }
                 }
             }
             _screeningRepository.Add(new Models.Screening(_screeningRepository.Find().Count + 1, dateTime,

@@ -42,6 +42,7 @@ namespace Cli.Display
             var cinemaNameInput = _display.Input<string>("Enter Cinema Name: ");
             var cinemaHallNoInput = _display.Input<int>("Enter Cinema Hall Number: ", "Input is not a integer", s => int.TryParse(s, out _));
             _screening.Add(screeningDateTimeInput, screenTypeInput, cinemaNameInput, cinemaHallNoInput, movies[movieIdInput - 1].Title);
+            _display.Text("Successfully Added Screening Session");
         }
     }
 }

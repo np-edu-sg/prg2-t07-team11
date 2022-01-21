@@ -72,6 +72,9 @@ namespace Cli
                     case 5:
                         screening.AddScreening();
                         break;
+                    case 6:
+                        screening.RemoveScreening();
+                        break;
                 }
             }
         }

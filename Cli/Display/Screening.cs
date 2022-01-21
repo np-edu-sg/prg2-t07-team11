@@ -48,10 +48,10 @@ namespace Cli.Display
         public void RemoveScreening()
         {
             Console.WriteLine("{0,-5}{1,-30}{2,-20}{3,-15}{4}", "S/N", "Date and Time of Screening", "Screening Type", "Hall Name", "Movie Title");
-            var screenings = _screening.Find();
+            var screenings = _screening.FindAllWithoutTickets();
             for (var idx = 0; idx < screenings.Count; idx++) Console.WriteLine($"{screenings[idx]}");
             var screeningIdInput = _display.Input<int>("Select a Screening: ", "Input is not a integer", s => int.TryParse(s, out _));
-            _screening.Remove(screenings[screeningIdInput - 1]);
+            _screening.Remove(screenings[screeningIdInput-1]);
         }
     }
 }

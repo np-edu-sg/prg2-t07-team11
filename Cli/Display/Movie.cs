@@ -5,9 +5,9 @@ namespace Cli.Display
     public class Movie
     {
         private readonly IDisplay _display;
-        private readonly Core.UseCase.Movie _movie;
+        private readonly Core.UseCases.Movie _movie;
 
-        public Movie(Core.UseCase.Movie movie, IDisplay display)
+        public Movie(Core.UseCases.Movie movie, IDisplay display)
         {
             _movie = movie;
             _display = display;

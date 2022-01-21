@@ -4,10 +4,10 @@ namespace Cli.Display
 {
     public class Cinema
     {
-        private readonly Core.UseCase.Cinema _cinema;
+        private readonly Core.UseCases.Cinema _cinema;
         private readonly IDisplay _display;
 
-        public Cinema(Core.UseCase.Cinema cinema, IDisplay display)
+        public Cinema(Core.UseCases.Cinema cinema, IDisplay display)
         {
             _cinema = cinema;
             _display = display;

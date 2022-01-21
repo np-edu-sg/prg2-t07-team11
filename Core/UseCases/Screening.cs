@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using Core.Repository;
 
-namespace Core.UseCase
+namespace Core.UseCases
 {
     public class Screening
     {
@@ -25,7 +25,6 @@ namespace Core.UseCase
         {
             return _screeningRepository.Find();
         }
-
         public void Add(DateTime dateTime, string screeningType, string cinemaName, int cinemaHallNo, string movieTitle)
         {
             var cinema = _cinemaRepository.FindOneByNameAndHallNo(cinemaName, cinemaHallNo);
@@ -45,7 +44,7 @@ namespace Core.UseCase
                 if (s.ScreeningDateTime.Date == dateTime.Date)
                 {
                     var screeningEndDateTime = s.ScreeningDateTime + movieDuration + cleaningTime;
-                    if (endDateTime > s.ScreeningDateTime || (dateTime > s.ScreeningDateTime && dateTime <= screeningEndDateTime))
+                    if (endDateTime > s.ScreeningDateTime || dateTime > s.ScreeningDateTime && dateTime <= screeningEndDateTime)
                     {
                         throw new Exception("Cinema Hall Is Not Available");
                     }

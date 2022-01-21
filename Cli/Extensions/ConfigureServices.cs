@@ -1,5 +1,6 @@
 ﻿using Core.Repository;
 using Core.Repository.Csv;
+using Core.UseCases;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Cli.Extensions
@@ -16,8 +17,8 @@ namespace Cli.Extensions
 
         public static IServiceCollection AddUseCases(this IServiceCollection services) =>
             services
-                .AddSingleton<Core.UseCase.Movie>()
-                .AddSingleton<Core.UseCase.Cinema>()
-                .AddSingleton<Core.UseCase.Screening>();
+                .AddSingleton<Core.UseCases.Movie>()
+                .AddSingleton<Core.UseCases.Cinema>()
+                .AddSingleton<Core.UseCases.Screening>();
     }
 }

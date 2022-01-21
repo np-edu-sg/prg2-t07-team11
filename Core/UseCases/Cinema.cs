@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Core.Repository;
 
-namespace Core.UseCase
+namespace Core.UseCases
 {
     public class Cinema
     {

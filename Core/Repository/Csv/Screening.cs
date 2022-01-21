@@ -10,7 +10,9 @@ namespace Core.Repository.Csv
         private readonly string _path;
         private readonly IMovie _movie;
         private readonly ICinema _cinema;
+
         private readonly List<Models.Screening> _screenings = new();
+        private readonly List<Models.Ticket> _tickets = new();
         public Screening(string path, IMovie movie, ICinema cinema) => (_path, _movie, _cinema) = (path, movie, cinema);
 
         public void Init()
@@ -49,20 +51,26 @@ namespace Core.Repository.Csv
             }
         }
 
-        public List<Models.Screening> Find()
-        {
-            return _screenings;
-        }
+        public List<Models.Screening> Find() => _screenings;
 
-        public List<Models.Screening> FindByCinema(Models.Cinema cinema)
-        {
-            return _screenings.FindAll(s => s.Cinema == cinema);
-        }
+        public List<Models.Screening> FindByCinema(Models.Cinema cinema) => _screenings.FindAll(s => s.Cinema == cinema);
 
-        public void Add(Models.Screening screening)
+        public void Add(Models.Screening screening) => _screenings.Add(screening);
+
+
+        private List<Models.Ticket> FindTicketsByScreeningNo(int no) => _tickets.FindAll(t => t.Screening.ScreeningNo == no);
+        public List<Models.Screening> FindByTicketCount(int count)
         {
-            _screenings.Add(new Models.Screening(_screenings.Count + 1, screening.ScreeningDateTime,
-                screening.ScreeningType, screening.Cinema, screening.Movie));
+            var screenings = new List<Models.Screening>();
+            foreach (var screening in _screenings)
+            {
+                if (FindTicketsByScreeningNo(screening.ScreeningNo).Count > 0) continue;
+
+                screenings.Add(screening);
+            }
+
+            return screenings;
         }
+        public void AddTicket(Models.Ticket ticket) => _tickets.Add(ticket);
     }
 }

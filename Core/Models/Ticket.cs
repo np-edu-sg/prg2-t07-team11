@@ -1,6 +1,6 @@
 ﻿namespace Core.Models
 {
-    public class Ticket
+    public abstract class Ticket
     {
         public Screening Screening { get; set; }
 
@@ -13,9 +13,7 @@
             Screening = screening;
         }
 
-        public double CalculatePrice()
-        {
-            return 0;
-        }
+        public abstract double CalculatePrice();
+
     }
 }

@@ -3,14 +3,15 @@ using System;
 using System.Globalization;
 using Cli.Display;
 using Core.Repository;
+
 namespace Cli.Display
 {
     public class Screening
     {
         private readonly IDisplay _display;
-        private readonly Core.UseCase.Screening _screening;
-        private readonly Core.UseCase.Movie _movie;
-        public Screening(Core.UseCase.Screening screening, IDisplay display, Core.UseCase.Movie movie)
+        private readonly Core.UseCases.Screening _screening;
+        private readonly Core.UseCases.Movie _movie;
+        public Screening(Core.UseCases.Screening screening, IDisplay display, Core.UseCases.Movie movie)
         {
             _screening = screening;
             _display = display;

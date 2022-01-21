@@ -51,7 +51,7 @@ namespace Cli.Display
             var screenings = _screening.Find();
             for (var idx = 0; idx < screenings.Count; idx++) Console.WriteLine($"{screenings[idx]}");
             var screeningIdInput = _display.Input<int>("Select a Screening: ", "Input is not a integer", s => int.TryParse(s, out _));
-            _screening.Remove(screenings[screeningIdInput-1]);
+            _screening.Remove(screenings[screeningIdInput - 1]);
         }
     }
 }

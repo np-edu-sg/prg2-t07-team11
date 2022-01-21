@@ -41,7 +41,7 @@ namespace Core.Repository.Csv
             }
         }
 
-        public List<Models.Movie> Find()
+        public List<Models.Movie> FindAll()
         {
             return _movies;
         }

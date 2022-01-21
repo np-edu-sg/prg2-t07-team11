@@ -6,7 +6,7 @@ namespace Core.Repository
     public interface ICinemaReader
     {
         public void Init();
-        public List<Cinema> Find();
+        public List<Cinema> FindAll();
 
         public Cinema FindOneByNameAndHallNo(string cinemaName, int hallNo);
     }

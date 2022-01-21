@@ -5,10 +5,10 @@ namespace Core.Repository
 {
     public interface IScreeningReader
     {
-        public List<Screening> Find();
+        public List<Screening> FindAll();
 
-        public List<Screening> FindByCinema(Cinema cinema);
-        public List<Screening> FindByTicketCount(int count);
+        public List<Screening> FindAllByCinema(Cinema cinema);
+        public List<Screening> FindAllWithoutTickets();
     }
 
     public interface IScreeningWriter

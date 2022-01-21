@@ -1,6 +1,4 @@
 ﻿using Core.Repository;
-using Core.Repository.Csv;
-using Core.UseCases;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Cli.Extensions
@@ -9,10 +7,10 @@ namespace Cli.Extensions
     {
         public static IServiceCollection AddRepositories(this IServiceCollection services) =>
             services
-                .AddSingleton(typeof(IMovie), _ => new Movie("./Assets/Movie.csv"))
-                .AddSingleton(typeof(ICinema), _ => new Cinema("./Assets/Cinema.csv"))
+                .AddSingleton(typeof(IMovie), _ => new Core.Repository.Csv.Movie("./Assets/Movie.csv"))
+                .AddSingleton(typeof(ICinema), _ => new Core.Repository.Csv.Cinema("./Assets/Cinema.csv"))
                 .AddSingleton(typeof(IScreening),
-                    s => new Screening("./Assets/Screening.csv",
+                    s => new Core.Repository.Csv.Screening("./Assets/Screening.csv",
                         s.GetRequiredService<IMovie>(), s.GetRequiredService<ICinema>()));
 
         public static IServiceCollection AddUseCases(this IServiceCollection services) =>

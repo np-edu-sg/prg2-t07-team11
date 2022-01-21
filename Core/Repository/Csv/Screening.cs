@@ -51,15 +51,15 @@ namespace Core.Repository.Csv
             }
         }
 
-        public List<Models.Screening> Find() => _screenings;
+        public List<Models.Screening> FindAll() => _screenings;
 
-        public List<Models.Screening> FindByCinema(Models.Cinema cinema) => _screenings.FindAll(s => s.Cinema == cinema);
+        public List<Models.Screening> FindAllByCinema(Models.Cinema cinema) => _screenings.FindAll(s => s.Cinema == cinema);
 
         public void Add(Models.Screening screening) => _screenings.Add(screening);
 
 
         private List<Models.Ticket> FindTicketsByScreeningNo(int no) => _tickets.FindAll(t => t.Screening.ScreeningNo == no);
-        public List<Models.Screening> FindByTicketCount(int count)
+        public List<Models.Screening> FindAllWithoutTickets()
         {
             var screenings = new List<Models.Screening>();
             foreach (var screening in _screenings)

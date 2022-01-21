@@ -23,14 +23,14 @@ namespace Core.UseCases
 
         public List<Models.Screening> Find()
         {
-            return _screeningRepository.Find();
+            return _screeningRepository.FindAll();
         }
         public void Add(DateTime dateTime, string screeningType, string cinemaName, int cinemaHallNo, string movieTitle)
         {
             var cinema = _cinemaRepository.FindOneByNameAndHallNo(cinemaName, cinemaHallNo);
             var movie = _movieRepository.FindOneByTitle(movieTitle);
             var movieDuration = TimeSpan.FromMinutes(movie.Duration);
-            var screening = _screeningRepository.FindByCinema(cinema);
+            var screening = _screeningRepository.FindAllByCinema(cinema);
             var cleaningTime = new TimeSpan(0, 0, 30, 0);
             var endDateTime = dateTime + movieDuration + cleaningTime;
             if (cinema is null) throw new Exception("Invalid cinema");
@@ -50,7 +50,7 @@ namespace Core.UseCases
                     }
                 }
             }
-            _screeningRepository.Add(new Models.Screening(_screeningRepository.Find().Count + 1, dateTime,
+            _screeningRepository.Add(new Models.Screening(_screeningRepository.FindAll().Count + 1, dateTime,
                 screeningType, cinema, movie));
         }
     }

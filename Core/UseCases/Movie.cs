@@ -16,7 +16,7 @@ namespace Core.UseCases
 
         public List<Models.Movie> Find()
         {
-            return _movieRepository.Find();
+            return _movieRepository.FindAll();
         }
     }
 }

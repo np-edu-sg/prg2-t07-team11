@@ -71,6 +71,11 @@ namespace Core.Repository.Csv
 
             return screenings;
         }
+
+        public void Remove(Models.Screening screening)
+        {
+            _screenings.Remove(screening);
+        }
         public void AddTicket(Models.Ticket ticket) => _tickets.Add(ticket);
     }
 }

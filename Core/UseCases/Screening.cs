@@ -53,5 +53,10 @@ namespace Core.UseCases
             _screeningRepository.Add(new Models.Screening(_screeningRepository.FindAll().Count + 1, dateTime,
                 screeningType, cinema, movie));
         }
+
+        public void Remove(Models.Screening screening)
+        {
+            _screeningRepository.Remove(screening);
+        }
     }
 }

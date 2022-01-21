@@ -14,6 +14,7 @@ namespace Core.Repository
     public interface IScreeningWriter
     {
         public void Add(Screening screening);
+        public void Remove(Screening screening);
         public void AddTicket(Ticket ticket);
     }
 

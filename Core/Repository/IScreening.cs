@@ -15,9 +15,8 @@ namespace Core.Repository
     {
         public void Add(Screening screening);
         public void Remove(Screening screening);
-        public void AddTicket(Ticket ticket);
 
-        public void Remove(Screening screening);
+        public void AddTicket(Ticket ticket);
     }
 
     public interface IScreening : IScreeningReader, IScreeningWriter

@@ -58,7 +58,7 @@ namespace Core.UseCases
         {
             return _screeningRepository.FindAllWithoutTickets();
         }
-        
+
         public void Remove(Models.Screening screening)
         {
             _screeningRepository.Remove(screening);

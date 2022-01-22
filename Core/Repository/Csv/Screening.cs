@@ -77,5 +77,7 @@ namespace Core.Repository.Csv
             _screenings.Remove(screening);
         }
         public void AddTicket(Models.Ticket ticket) => _tickets.Add(ticket);
+
+        public void Remove(Models.Screening screening) => _screenings.Remove(screening);
     }
 }

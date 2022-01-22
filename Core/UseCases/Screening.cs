@@ -54,6 +54,11 @@ namespace Core.UseCases
                 screeningType, cinema, movie));
         }
 
+        public List<Models.Screening> FindAllWithoutTickets()
+        {
+            return _screeningRepository.FindAllWithoutTickets();
+        }
+        
         public void Remove(Models.Screening screening)
         {
             _screeningRepository.Remove(screening);

@@ -13,7 +13,7 @@ namespace Cli
     {
         private static void Main(string[] args)
         {
-            Console.WriteLine("Movieeeeeeee");
+            Console.WriteLine("Loading...");
 
             using var host = Host.CreateDefaultBuilder(args)
                 .ConfigureServices(services =>
@@ -49,8 +49,12 @@ namespace Cli
             var cinema = host.Services.GetRequiredService<Cinema>();
             var screening = host.Services.GetRequiredService<Screening>();
 
+            display.Clear();
+            display.Header("Welcome to Singa Cineplexes");
+
             while (true)
             {
+                Console.WriteLine();
                 var option = display.Menu(rootMenu, "Enter your option: ", "Please enter a valid option");
                 Console.WriteLine();
 
@@ -71,6 +75,9 @@ namespace Cli
                         break;
                     case 5:
                         screening.AddScreening();
+                        break;
+                    case 6:
+                        screening.RemoveScreening();
                         break;
                 }
             }

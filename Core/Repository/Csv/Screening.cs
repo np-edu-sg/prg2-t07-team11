@@ -56,6 +56,7 @@ namespace Core.Repository.Csv
         public List<Models.Screening> FindAllByCinema(Models.Cinema cinema) => _screenings.FindAll(s => s.Cinema == cinema);
 
         public void Add(Models.Screening screening) => _screenings.Add(screening);
+        public void Remove(Models.Screening screening) => _screenings.Remove(screening);
 
 
         private List<Models.Ticket> FindTicketsByScreeningNo(int no) => _tickets.FindAll(t => t.Screening.ScreeningNo == no);

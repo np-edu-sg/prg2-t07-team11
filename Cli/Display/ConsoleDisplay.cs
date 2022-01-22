@@ -5,9 +5,21 @@ namespace Cli.Display
 {
     public class ConsoleDisplay : IDisplay
     {
-        public void Text(object s)
+        public void Clear() => Console.Clear();
+        public void Text(object s) => Console.WriteLine(s);
+
+        public void Header(object s)
         {
-            Console.WriteLine(s);
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            var line = "";
+            for (var idx = 0; idx < s.ToString().Length + 2; idx++) line += "-";
+
+            Console.WriteLine($"/{line}\\");
+            Console.WriteLine($"| {s.ToString()} |");
+            Console.WriteLine($"\\{line}/");
+            Console.WriteLine();
+
+            Console.ResetColor();
         }
 
         public T Input<T>(string message, string error, Predicate<string> validator)
@@ -32,15 +44,35 @@ namespace Cli.Display
 
         public int Menu(List<string> items, string message, string error)
         {
-            for (var idx = 0; idx < items.Count; idx++) Console.WriteLine($"[{idx + 1}] {items[idx]}");
+
+            for (var idx = 0; idx < items.Count; idx++)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write($"[{idx + 1}] ");
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.WriteLine(items[idx]);
+            };
+
+            Console.ResetColor();
+            Console.WriteLine();
 
             int input;
             while (true)
             {
+                Console.ForegroundColor = ConsoleColor.DarkGray;
                 Console.Write(message);
+                Console.ForegroundColor = ConsoleColor.White;
+
                 if (int.TryParse(Console.ReadLine(), out input) && -1 < input && input < items.Count) break;
+
+                Console.BackgroundColor = ConsoleColor.Red;
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine(error);
+                Console.ResetColor();
+                Console.WriteLine();
             }
+
+            Console.ResetColor();
 
             return input;
         }

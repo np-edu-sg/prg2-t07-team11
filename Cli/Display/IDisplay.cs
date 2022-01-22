@@ -5,6 +5,8 @@ namespace Cli
 {
     public interface IDisplay
     {
+        public void Clear();
+        public void Header(object s);
         public void Text(object s);
         public T Input<T>(string message, string error, Predicate<string> validator);
         public T Input<T>(string message);

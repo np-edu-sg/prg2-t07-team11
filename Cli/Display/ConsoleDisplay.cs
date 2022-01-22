@@ -21,6 +21,59 @@ namespace Cli.Display
 
             Console.ResetColor();
         }
+        public int InteractiveTableSelect<T>(List<T> list, string header)
+        {
+            var selected = 0;
+            Console.Clear();
+
+            while (true)
+            {
+                Console.SetCursorPosition(0, 0);
+
+                Console.BackgroundColor = ConsoleColor.DarkGray;
+                Console.ForegroundColor = ConsoleColor.White;
+
+                Console.WriteLine(header);
+
+                Console.ResetColor();
+
+                for (var idx = 0; idx < list.Count; idx++)
+                {
+                    if (idx == selected)
+                    {
+                        Console.BackgroundColor = ConsoleColor.Gray;
+                        Console.ForegroundColor = ConsoleColor.Black;
+                    }
+
+                    Console.WriteLine(list[idx]);
+                    Console.ResetColor();
+                }
+
+                Console.WriteLine();
+
+                ConsoleKeyInfo key;
+                while (true)
+                {
+                    key = Console.ReadKey();
+                    if (key.Key is ConsoleKey.UpArrow or ConsoleKey.DownArrow or ConsoleKey.Escape or ConsoleKey.Enter) break;
+                }
+
+                switch (key.Key)
+                {
+                    case ConsoleKey.UpArrow:
+                        if (selected > 0) selected--;
+                        break;
+                    case ConsoleKey.DownArrow:
+                        if (selected < list.Count - 1) selected++;
+                        break;
+                    case ConsoleKey.Escape:
+                    case ConsoleKey.Enter:
+                        return selected;
+                    default:
+                        throw new Exception("What?");
+                }
+            }
+        }
 
         public T Input<T>(string message, string error, Predicate<string> validator)
         {

@@ -11,6 +11,8 @@ namespace Core.Models
         public Cinema Cinema { get; set; }
         public Movie Movie { get; set; }
 
+        public static string Header = $"{"Movie Title",-30}{"Cinema",-15}{"Screening Type",-10}{"Date and Time",-25}";
+
         public Screening()
         {
         }
@@ -26,7 +28,7 @@ namespace Core.Models
 
         public override string ToString()
         {
-            return $"{ScreeningNo,-5}{ScreeningDateTime,-30}{ScreeningType,-20}{Cinema.Name,-15}{Movie.Title}";
+            return $"{Movie.Title, -30}{Cinema.Name, -15}{ScreeningType, -10}{ScreeningDateTime, -25}";
         }
     }
 }

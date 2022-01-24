@@ -5,14 +5,23 @@ namespace Cli.Display
 {
     public class ConsoleDisplay : IDisplay
     {
+        private readonly Window _window;
+
+        public ConsoleDisplay(Window window)
+        {
+            _window = window;
+        }
+
         public void Clear() => Console.Clear();
         public void Text(object s) => Console.WriteLine(s);
 
         public void Header(object s)
         {
+            if (s is null) return;
+
             Console.ForegroundColor = ConsoleColor.Yellow;
             var line = "";
-            for (var idx = 0; idx < s.ToString().Length + 2; idx++) line += "-";
+            for (var idx = 0; idx < s.ToString()!.Length + 2; idx++) line += "-";
 
             Console.WriteLine($"/{line}\\");
             Console.WriteLine($"| {s.ToString()} |");
@@ -21,13 +30,23 @@ namespace Cli.Display
 
             Console.ResetColor();
         }
+
         public int InteractiveTableSelect<T>(List<T> list, string header)
         {
+            var width = _window.Width;
+            var height = -_window.Height;
+
             var selected = 0;
             Console.Clear();
 
             while (true)
             {
+                if (_window.Width != width || _window.Height != height)
+                {
+                    (width, height) = (_window.Width, _window.Height);
+                    Console.Clear();
+                }
+
                 Console.SetCursorPosition(0, 0);
 
                 Console.BackgroundColor = ConsoleColor.DarkGray;
@@ -55,7 +74,8 @@ namespace Cli.Display
                 while (true)
                 {
                     key = Console.ReadKey();
-                    if (key.Key is ConsoleKey.UpArrow or ConsoleKey.DownArrow or ConsoleKey.Escape or ConsoleKey.Enter) break;
+                    if (key.Key is ConsoleKey.UpArrow or ConsoleKey.DownArrow or ConsoleKey.Escape
+                        or ConsoleKey.Enter) break;
                 }
 
                 switch (key.Key)
@@ -86,25 +106,26 @@ namespace Cli.Display
                 Console.WriteLine(error);
             }
 
-            return (T)Convert.ChangeType(input, typeof(T));
+            return (T) Convert.ChangeType(input, typeof(T));
         }
 
         public T Input<T>(string message)
         {
             Console.Write(message);
-            return (T)Convert.ChangeType(Console.ReadLine(), typeof(T));
+            return (T) Convert.ChangeType(Console.ReadLine(), typeof(T));
         }
 
         public int Menu(List<string> items, string message, string error)
         {
-
             for (var idx = 0; idx < items.Count; idx++)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.Write($"[{idx + 1}] ");
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.WriteLine(items[idx]);
-            };
+            }
+
+            ;
 
             Console.ResetColor();
             Console.WriteLine();

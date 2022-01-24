@@ -19,7 +19,7 @@ namespace Cli
                 .ConfigureServices(services =>
                 {
                     services.AddSingleton<Window>();
-                    
+
                     services
                         .AddLogging(builder => { builder.ClearProviders(); })
                         .AddHostedService(s => s.GetRequiredService<Window>())
@@ -32,7 +32,7 @@ namespace Cli
                         .AddSingleton<Screening>();
                 })
                 .Build();
-            
+
             await host.RunAsync();
         }
     }

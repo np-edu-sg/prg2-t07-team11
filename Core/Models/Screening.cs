@@ -28,7 +28,7 @@ namespace Core.Models
 
         public override string ToString()
         {
-            return $"{Movie.Title, -30}{Cinema.Name, -15}{ScreeningType, -10}{ScreeningDateTime, -25}";
+            return $"{Movie.Title,-30}{Cinema.Name,-15}{ScreeningType,-10}{ScreeningDateTime,-25}";
         }
     }
 }

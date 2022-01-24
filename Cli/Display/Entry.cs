@@ -6,7 +6,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace Cli.Display
 {
-    public class Entry: IHostedService
+    public class Entry : IHostedService
     {
         private readonly IDisplay _display;
         private readonly Movie _movie;
@@ -15,7 +15,7 @@ namespace Cli.Display
 
         public Entry(IDisplay display, Movie movie, Cinema cinema, Screening screening) =>
             (_display, _movie, _cinema, _screening) = (display, movie, cinema, screening);
-        
+
         public Task StartAsync(CancellationToken cancellationToken)
         {
             var rootMenu = new List<string>

@@ -14,7 +14,7 @@ namespace Cli.Display
         public T Input<T>(string message, string error, Predicate<string> validator);
         public T Input<T>(string message);
         public int MenuInput(List<string> items, string message, string error);
-        
+
         public int InteractiveTableInput<T>(List<T> list, string header);
     }
 }

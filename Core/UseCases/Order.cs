@@ -28,7 +28,7 @@ namespace Core.UseCases
             foreach (var ticket in tickets)
             {
                 if (ticket.Screening is null) continue;
-                
+
                 screeningNo = ticket.Screening.ScreeningNo;
                 break;
             }
@@ -39,17 +39,17 @@ namespace Core.UseCases
             screening.SeatsRemaining -= tickets.Count;
 
             _orderRepository.Add(order);
-            
+
             return order;
         }
-        
+
         public Core.Models.Order Pay(int orderNo)
         {
             var order = _orderRepository.FindByNo(orderNo);
 
             var payable = 0.0;
             foreach (var ticket in order.TicketList) payable += ticket.CalculatePrice();
-            
+
             order.Amount = payable;
             order.Status = "Paid";
 

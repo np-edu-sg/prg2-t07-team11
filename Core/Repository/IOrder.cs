@@ -14,7 +14,7 @@ namespace Core.Repository
         public Order Add(Order order);
     }
 
-    public interface IOrder: IOrderReader, IOrderWriter
+    public interface IOrder : IOrderReader, IOrderWriter
     {
     }
 }

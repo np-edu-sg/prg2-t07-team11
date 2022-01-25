@@ -15,6 +15,7 @@
 
         public override double CalculatePrice()
         {
+            var popcorn = PopcornOffer ? 3 : 0;
             var day = Screening.ScreeningDateTime.GetDayOfWeek();
 
             if (Screening.ScreeningType == "3D")
@@ -22,9 +23,9 @@
                 switch (day)
                 {
                     case DayOfWeek.MonToThurs:
-                        return 11;
+                        return 11 + popcorn;
                     case DayOfWeek.FriToSun:
-                        return 14;
+                        return 14 + popcorn;
                 }
             }
 
@@ -33,9 +34,9 @@
                 switch (day)
                 {
                     case DayOfWeek.MonToThurs:
-                        return 8.50;
+                        return 8.50 + popcorn;
                     case DayOfWeek.FriToSun:
-                        return 12.50;
+                        return 12.50 + popcorn;
                 }
             }
 

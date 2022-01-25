@@ -5,7 +5,9 @@ namespace Core.Repository
 {
     public interface IScreeningReader
     {
+        public Screening FindByNo(int no);
         public List<Screening> FindAll();
+        public List<Screening> FindAllByMovieTitle(string name);
 
         public List<Screening> FindAllByCinema(Cinema cinema);
         public List<Screening> FindAllWithoutTickets();

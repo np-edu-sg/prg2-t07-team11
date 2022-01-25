@@ -38,12 +38,14 @@ namespace Core.Repository.Csv
                         data[1],
                         c,
                         m
-                    );
+                    )
+                    {
+                        SeatsRemaining = c.Capacity
+                    };
 
                     m.AddScreening(screening);
                     _screenings.Add(screening);
                 }
-
             }
             catch (Exception ex)
             {
@@ -51,15 +53,26 @@ namespace Core.Repository.Csv
             }
         }
 
+        public Models.Screening FindByNo(int no)
+        {
+            return _screenings.Find(s => s.ScreeningNo == no);
+        }
+
         public List<Models.Screening> FindAll() => _screenings;
 
-        public List<Models.Screening> FindAllByCinema(Models.Cinema cinema) => _screenings.FindAll(s => s.Cinema == cinema);
+        public List<Models.Screening> FindAllByMovieTitle(string title) =>
+            _screenings.FindAll(s => s.Movie.Title == title);
+
+        public List<Models.Screening> FindAllByCinema(Models.Cinema cinema) =>
+            _screenings.FindAll(s => s.Cinema == cinema);
 
         public void Add(Models.Screening screening) => _screenings.Add(screening);
         public void Remove(Models.Screening screening) => _screenings.Remove(screening);
 
 
-        private List<Models.Ticket> FindTicketsByScreeningNo(int no) => _tickets.FindAll(t => t.Screening.ScreeningNo == no);
+        private List<Models.Ticket> FindTicketsByScreeningNo(int no) =>
+            _tickets.FindAll(t => t.Screening.ScreeningNo == no);
+
         public List<Models.Screening> FindAllWithoutTickets()
         {
             var screenings = new List<Models.Screening>();
@@ -72,6 +85,7 @@ namespace Core.Repository.Csv
 
             return screenings;
         }
+
         public void AddTicket(Models.Ticket ticket) => _tickets.Add(ticket);
     }
 }

@@ -39,7 +39,7 @@ namespace Cli.Display
             while (true)
             {
                 Console.WriteLine();
-                var option = _display.Menu(rootMenu, "Enter your option: ", "Please enter a valid option");
+                var option = _display.MenuInput(rootMenu, "Enter your option: ", "Please enter a valid option");
                 Console.WriteLine();
 
                 switch (option)
@@ -62,6 +62,9 @@ namespace Cli.Display
                         break;
                     case 6:
                         _screening.RemoveScreening();
+                        break;
+                    case 7:
+                        _screening.OrderTickets();
                         break;
                 }
             }

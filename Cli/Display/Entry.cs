@@ -6,17 +6,20 @@ using Microsoft.Extensions.Hosting;
 
 namespace Cli.Display
 {
-    public class Entry : IHostedService
+    public class Entry : BackgroundService
     {
+        private readonly IHostApplicationLifetime _hostApplicationLifetime;
         private readonly IDisplay _display;
         private readonly Movie _movie;
         private readonly Cinema _cinema;
         private readonly Screening _screening;
 
-        public Entry(IDisplay display, Movie movie, Cinema cinema, Screening screening) =>
-            (_display, _movie, _cinema, _screening) = (display, movie, cinema, screening);
+        public Entry(IHostApplicationLifetime hostApplicationLifetime, IDisplay display, Movie movie, Cinema cinema,
+            Screening screening) =>
+            (_hostApplicationLifetime, _display, _movie, _cinema, _screening) =
+            (hostApplicationLifetime, display, movie, cinema, screening);
 
-        public Task StartAsync(CancellationToken cancellationToken)
+        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             var rootMenu = new List<string>
             {
@@ -30,13 +33,13 @@ namespace Cli.Display
                 "Cancel order of ticket",
                 "Recommend movies",
                 "Display available seats of screening session",
-                "Start Web API",
+                "View Web API",
             };
 
-            // _display.Clear();
+            _display.Clear();
             _display.Header("Welcome to Singa Cineplexes");
 
-            while (true)
+            while (!stoppingToken.IsCancellationRequested)
             {
                 Console.WriteLine();
                 var option = _display.MenuInput(rootMenu, "Enter your option: ", "Please enter a valid option");
@@ -44,6 +47,9 @@ namespace Cli.Display
 
                 switch (option)
                 {
+                    case 0:
+                        _hostApplicationLifetime.StopApplication();
+                        return;
                     case 1:
                         _movie.LoadData();
                         _cinema.LoadData();
@@ -68,11 +74,6 @@ namespace Cli.Display
                         break;
                 }
             }
-        }
-
-        public Task StopAsync(CancellationToken cancellationToken)
-        {
-            return Task.CompletedTask;
         }
     }
 }

@@ -140,6 +140,11 @@ namespace Cli.Display
                 Console.WriteLine(items[idx]);
             }
 
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.Write("[0] ");
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.WriteLine("Exit");
+
             Console.ResetColor();
             Console.WriteLine();
 

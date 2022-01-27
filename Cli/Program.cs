@@ -1,11 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using Cli.Display;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Hosting;
+using Cli.Display;
 using Cli.Extensions;
+using Microsoft.AspNetCore.Builder;
 
 namespace Cli
 {
@@ -15,7 +16,18 @@ namespace Cli
         {
             Console.WriteLine("Loading...");
 
-            using var host = Host.CreateDefaultBuilder(args)
+            await Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseKestrel(kestrel => { kestrel.ListenAnyIP(8080); });
+                    webBuilder.ConfigureServices(services => { services.AddControllers(); });
+                    webBuilder.Configure((app) =>
+                    {
+                        app.UseRouting();
+                        app.UseEndpoints(endpoints => endpoints.MapControllers());
+                    });
+                    webBuilder.UseShutdownTimeout(new TimeSpan(0, 0, 1));
+                })
                 .ConfigureServices(services =>
                 {
                     services.AddSingleton<Window>();
@@ -31,9 +43,7 @@ namespace Cli
                         .AddSingleton<Cinema>()
                         .AddSingleton<Screening>();
                 })
-                .Build();
-
-            await host.RunAsync();
+                .RunConsoleAsync();
         }
     }
 }

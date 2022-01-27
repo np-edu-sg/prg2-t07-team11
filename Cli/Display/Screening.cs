@@ -8,28 +8,35 @@ namespace Cli.Display
     {
         private readonly Dictionary<string, int> _classifications = new()
         {
-            { "PG13", 13 },
-            { "NC16", 16 },
-            { "M18", 18 },
-            { "R21", 21 }
+            {"PG13", 13},
+            {"NC16", 16},
+            {"M18", 18},
+            {"R21", 21}
         };
 
-        private readonly List<string> _study = new() { "Primary", "Secondary", "Tertiary" };
-        private readonly List<string> _ticketType = new() { "Student", "Senior Citizen", "Adult" };
+        private readonly List<string> _study = new() {"Primary", "Secondary", "Tertiary"};
+        private readonly List<string> _ticketType = new() {"Student", "Senior Citizen", "Adult"};
 
         private readonly IDisplay _display;
         private readonly Core.UseCases.Screening _screening;
         private readonly Core.UseCases.Movie _movie;
         private readonly Core.UseCases.Order _order;
+        private readonly Core.UseCases.Cinema _cinema;
 
-        public Screening(IDisplay display, Core.UseCases.Screening screening, Core.UseCases.Movie movie,
-            Core.UseCases.Order order)
+        public Screening(
+            IDisplay display,
+            Core.UseCases.Screening screening,
+            Core.UseCases.Movie movie,
+            Core.UseCases.Order order,
+            Core.UseCases.Cinema cinema
+        )
         {
             _display = display;
             _screening = screening;
             _display = display;
             _movie = movie;
             _order = order;
+            _cinema = cinema;
         }
 
         public void LoadData()
@@ -55,12 +62,26 @@ namespace Cli.Display
                 s => s is "2D" or "3D");
             var screeningDateTimeInput = _display.Input<DateTime>("Enter Screening Date And Time: ",
                 "Input Is Not In DateTime format", s => DateTime.TryParse(s, out _));
-            var cinemaNameInput = _display.Input<string>("Enter Cinema Name: ");
-            var cinemaHallNoInput = _display.Input<int>("Enter Cinema Hall Number: ", "Input is not a integer",
-                s => int.TryParse(s, out _));
 
-            _screening.Add(screeningDateTimeInput, screenTypeInput, cinemaNameInput, cinemaHallNoInput,
-                movies[movieIdxInput].Title);
+            var cinemas = _cinema.Find();
+            var cinemaIdx = _display.InteractiveTableInput(cinemas, Core.Models.Cinema.Header);
+
+            try
+            {
+                _screening.Add(
+                    screeningDateTimeInput,
+                    screenTypeInput,
+                    cinemas[cinemaIdx].Name,
+                    cinemas[cinemaIdx].HallNo,
+                    movies[movieIdxInput].Title
+                );
+            }
+            catch (Exception ex)
+            {
+                _display.Error(ex.Message);
+                return;
+            }
+
 
             _display.Text("Successfully Added Screening Session");
         }

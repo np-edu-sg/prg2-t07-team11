@@ -16,10 +16,7 @@ The solution contains 2 projects:
 
 ## IDisplay
 
-`IDisplay` is a display abstraction. There are 2 implementations: `BasicDisplay` and `InteractiveDisplay`:
-
-* `BasicDisplay`: The basic display, same as using Console
-* `InteractiveDisplay`: This is supposed to be a more interactive and GUI like display. I don't know if it works D:
+`IDisplay` is a display abstraction. 
 
 ## Cli project structure
 

@@ -18,6 +18,8 @@ namespace Core.UseCases
 
         public Core.Models.Order Add(List<Ticket> tickets)
         {
+            if (tickets.Count == 0) throw new Exception("List of tickets cannot be empty");
+
             var order = new Core.Models.Order(_orderRepository.FindAll().Count + 1, DateTime.Now)
             {
                 TicketList = tickets,
@@ -54,6 +56,20 @@ namespace Core.UseCases
             order.Status = "Paid";
 
             return order;
+        }
+
+        public void Cancel(int orderNo)
+        {
+            var order = _orderRepository.FindByNo(orderNo);
+            if (order is null) throw new Exception("Order does not exist");
+            if (order.TicketList.Count < 1) throw new Exception("No tickets in order");
+            if (order.TicketList[0].Screening is null) throw new Exception("Screening object in ticket is null");
+
+            if (DateTime.Now > order.TicketList[0].Screening.ScreeningDateTime)
+                throw new Exception("Screening has passed. You may not cancel your order.");
+
+            order.TicketList[0].Screening.SeatsRemaining += order.TicketList.Count;
+            order.Status = "Cancelled";
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Cli.Display
             (_hostApplicationLifetime, _display, _movie, _cinema, _screening) =
             (hostApplicationLifetime, display, movie, cinema, screening);
 
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+        protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
             var rootMenu = new List<string>
             {
@@ -33,14 +33,16 @@ namespace Cli.Display
                 "Cancel order of ticket",
                 "Recommend movies",
                 "Display available seats of screening session",
-                "View Web API",
             };
 
             _display.Clear();
             _display.Header("Welcome to Singa Cineplexes");
+            _display.Text(
+                "Press CTRL-C or SIGTERM to request stop. The program may not honor your request. Use the Exit function instead to always exit successfully.");
 
             while (!stoppingToken.IsCancellationRequested)
             {
+                Console.WriteLine();
                 Console.WriteLine();
                 var option = _display.MenuInput(rootMenu, "Enter your option: ", "Please enter a valid option");
                 Console.WriteLine();
@@ -49,7 +51,7 @@ namespace Cli.Display
                 {
                     case 0:
                         _hostApplicationLifetime.StopApplication();
-                        return;
+                        return Task.CompletedTask;
                     case 1:
                         _movie.LoadData();
                         _cinema.LoadData();
@@ -72,8 +74,13 @@ namespace Cli.Display
                     case 7:
                         _screening.OrderTickets();
                         break;
+                    case 8:
+                        _screening.CancelOrder();
+                        break;
                 }
             }
+
+            return Task.CompletedTask;
         }
     }
 }

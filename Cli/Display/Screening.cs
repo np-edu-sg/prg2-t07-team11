@@ -111,11 +111,9 @@ namespace Cli.Display
             var screeningIdx = _display.InteractiveTableInput(screenings, Core.Models.Screening.Header);
             if (screeningIdx == -1) return;
 
-            _display.Text(screenings[screeningIdx].SeatsRemaining);
-
             var noTickets = _display.Input<int>("Enter number of tickets: ",
-                "Either enter a valid number, or there are not enough seats remaining",
-                s => int.TryParse(s, out var s2) && s2 <= screenings[screeningIdx].SeatsRemaining);
+                "There are either not enough seats remaining, or you have entered an invalid number.\nPlease enter a non-zero integer.\n",
+                s => int.TryParse(s, out var s2) && 0 < s2 && s2 <= screenings[screeningIdx].SeatsRemaining);
 
             var payable = 0.0;
             var tickets = new List<Ticket>();
@@ -137,7 +135,7 @@ namespace Cli.Display
 
                 ;
 
-                var ticket = default(Ticket);
+                Ticket ticket;
                 while (true)
                 {
                     var type = _display.InteractiveTableInput(
@@ -212,7 +210,28 @@ namespace Cli.Display
 
             _order.Pay(order.OrderNo);
 
-            _display.Text("You've successfully made payment, thank you!");
+            _display.Text("You have successfully made payment, thank you!");
+            _display.Text($"Order number: {order.OrderNo}");
+        }
+
+        public void CancelOrder()
+        {
+            var orderNo = _display.Input<int>("Enter your order number: ", "Invalid order number",
+                s => int.TryParse(s, out var s2) && _order.FindByNo(s2) is not null);
+            var order = _order.FindByNo(orderNo);
+
+            try
+            {
+                _order.Cancel(orderNo);
+                _display.Text($"You have been refunded ${order.Amount} for order no {orderNo}");
+                _display.Text($"You have successfully cancelled order no {orderNo}");
+                _order.FindAll().ForEach(Console.WriteLine);
+            }
+            catch (Exception ex)
+            {
+                _display.Error(ex.Message);
+                _display.Error($"Failed to cancel order no {orderNo}");
+            }
         }
     }
 }

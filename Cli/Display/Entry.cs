@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Core.Models;
 using Microsoft.Extensions.Hosting;
 
 namespace Cli.Display
@@ -77,9 +78,11 @@ namespace Cli.Display
                     case 8:
                         _screening.CancelOrder();
                         break;
+                    case 9:
+                        _movie.RecommendTop3Movie();
+                        break;
                 }
             }
-
             return Task.CompletedTask;
         }
     }

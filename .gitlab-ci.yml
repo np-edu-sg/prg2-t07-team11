@@ -2,6 +2,7 @@ image: mcr.microsoft.com/dotnet/sdk:6.0
 
 stages:
   - format
+  - test
   - build
 
 variables:
@@ -26,6 +27,11 @@ Format:
   stage: format
   script:
     - dotnet format --verify-no-changes --no-restore ./PRG2_T07_Team11.sln
+
+Testa:
+  stage: test
+  script:
+    - dotnet test --no-restore ./PRG2_T07_Team11.sln
 
 Build:
   stage: build

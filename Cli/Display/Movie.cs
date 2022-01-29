@@ -22,7 +22,7 @@ namespace Cli.Display
         public void ListAllMovies()
         {
             _display.Text(Core.Models.Movie.Header);
-            foreach (var movie in _movie.Find()) _display.Text(movie);
+            foreach (var movie in _movie.FindAll()) _display.Text(movie);
         }
     }
 }

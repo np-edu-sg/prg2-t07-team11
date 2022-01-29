@@ -7,11 +7,13 @@ namespace Core.UseCases
 {
     public class Order
     {
+        private readonly IDateTimeProvider _dateTimeProvider;
         private readonly IOrder _orderRepository;
         private readonly IScreening _screeningRepository;
 
-        public Order(IOrder orderRepository, IScreening screeningRepository) =>
-            (_orderRepository, _screeningRepository) = (orderRepository, screeningRepository);
+        public Order(IDateTimeProvider dateTimeProvider, IOrder orderRepository, IScreening screeningRepository) =>
+            (_dateTimeProvider, _orderRepository, _screeningRepository) =
+            (dateTimeProvider, orderRepository, screeningRepository);
 
         public Core.Models.Order FindByNo(int no) => _orderRepository.FindByNo(no);
         public List<Core.Models.Order> FindAll() => _orderRepository.FindAll();
@@ -20,7 +22,7 @@ namespace Core.UseCases
         {
             if (tickets.Count == 0) throw new Exception("List of tickets cannot be empty");
 
-            var order = new Core.Models.Order(_orderRepository.FindAll().Count + 1, DateTime.Now)
+            var order = new Core.Models.Order(_orderRepository.FindAll().Count + 1, _dateTimeProvider.Now())
             {
                 TicketList = tickets,
                 Status = "Unpaid",
@@ -38,7 +40,7 @@ namespace Core.UseCases
             if (screeningNo == -1) throw new Exception("No screening found for tickets, something is seriously wrong");
 
             var screening = _screeningRepository.FindByNo(screeningNo);
-            screening.SeatsRemaining -= tickets.Count;
+            _screeningRepository.UpdateSeatsRemaining(screeningNo, screening.SeatsRemaining - tickets.Count);
 
             _orderRepository.Add(order);
 
@@ -48,12 +50,13 @@ namespace Core.UseCases
         public Core.Models.Order Pay(int orderNo)
         {
             var order = _orderRepository.FindByNo(orderNo);
+            if (order is null) throw new Exception("Order does not exist");
 
             var payable = 0.0;
             foreach (var ticket in order.TicketList) payable += ticket.CalculatePrice();
 
-            order.Amount = payable;
-            order.Status = "Paid";
+            _orderRepository.UpdateAmount(orderNo, payable);
+            _orderRepository.UpdateStatus(orderNo, "Paid");
 
             return order;
         }
@@ -65,11 +68,12 @@ namespace Core.UseCases
             if (order.TicketList.Count < 1) throw new Exception("No tickets in order");
             if (order.TicketList[0].Screening is null) throw new Exception("Screening object in ticket is null");
 
-            if (DateTime.Now > order.TicketList[0].Screening.ScreeningDateTime)
+            if (_dateTimeProvider.Now() > order.TicketList[0].Screening.ScreeningDateTime)
                 throw new Exception("Screening has passed. You may not cancel your order.");
 
-            order.TicketList[0].Screening.SeatsRemaining += order.TicketList.Count;
-            order.Status = "Cancelled";
+            _screeningRepository.UpdateSeatsRemaining(order.TicketList[0].Screening.ScreeningNo,
+                order.TicketList[0].Screening.SeatsRemaining + order.TicketList.Count);
+            _orderRepository.UpdateStatus(orderNo, "Cancelled");
         }
     }
 }

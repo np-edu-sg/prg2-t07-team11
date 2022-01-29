@@ -12,6 +12,8 @@ namespace Core.Repository
     public interface IOrderWriter
     {
         public Order Add(Order order);
+        public void UpdateAmount(int no, double amount);
+        public void UpdateStatus(int no, string status);
     }
 
     public interface IOrder : IOrderReader, IOrderWriter

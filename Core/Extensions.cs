@@ -16,8 +16,20 @@ namespace Core
     {
         public static DayOfWeek GetDayOfWeek(this DateTime dateTime)
         {
-            if (dateTime.Day <= 4) return DayOfWeek.MonToThurs;
-            return DayOfWeek.FriToSun;
+            switch (dateTime.DayOfWeek)
+            {
+                case System.DayOfWeek.Monday:
+                case System.DayOfWeek.Tuesday:
+                case System.DayOfWeek.Wednesday:
+                case System.DayOfWeek.Thursday:
+                    return DayOfWeek.MonToThurs;
+                case System.DayOfWeek.Friday:
+                case System.DayOfWeek.Saturday:
+                case System.DayOfWeek.Sunday:
+                    return DayOfWeek.FriToSun;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
     }
 }

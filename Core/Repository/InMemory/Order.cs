@@ -15,5 +15,17 @@ namespace Core.Repository.InMemory
             _orders.Add(order);
             return order;
         }
+
+        public void UpdateAmount(int no, double amount)
+        {
+            var order = FindByNo(no);
+            order.Amount = amount;
+        }
+
+        public void UpdateStatus(int no, string status)
+        {
+            var order = FindByNo(no);
+            order.Status = status;
+        }
     }
 }

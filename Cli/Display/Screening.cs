@@ -52,7 +52,7 @@ namespace Cli.Display
 
         public void AddScreening()
         {
-            var movies = _movie.Find();
+            var movies = _movie.FindAll();
 
             var movieIdxInput = _display.InteractiveTableInput(movies, Core.Models.Movie.Header);
             if (movieIdxInput == -1) return;
@@ -63,7 +63,7 @@ namespace Cli.Display
             var screeningDateTimeInput = _display.Input<DateTime>("Enter Screening Date And Time: ",
                 "Input Is Not In DateTime format", s => DateTime.TryParse(s, out _));
 
-            var cinemas = _cinema.Find();
+            var cinemas = _cinema.FindAll();
             var cinemaIdx = _display.InteractiveTableInput(cinemas, Core.Models.Cinema.Header);
 
             try
@@ -97,7 +97,7 @@ namespace Cli.Display
 
         public void OrderTickets()
         {
-            var movies = _movie.Find();
+            var movies = _movie.FindAll();
             var movieIdx = _display.InteractiveTableInput(movies, Core.Models.Movie.Header);
             if (movieIdx == -1) return;
 

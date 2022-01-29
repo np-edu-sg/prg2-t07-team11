@@ -21,7 +21,7 @@ namespace Cli.Display
 
         public void ListAllCinemas()
         {
-            foreach (var cinema in _cinema.Find()) _display.Text(cinema);
+            foreach (var cinema in _cinema.FindAll()) _display.Text(cinema);
         }
     }
 }

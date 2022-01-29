@@ -14,7 +14,7 @@ namespace Core.UseCases
 
         public void LoadData() => _cinemaRepository.Init();
 
-        public List<Models.Cinema> Find()
+        public List<Models.Cinema> FindAll()
         {
             return _cinemaRepository.FindAll();
         }

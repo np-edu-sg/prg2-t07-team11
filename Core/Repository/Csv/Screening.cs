@@ -67,6 +67,15 @@ namespace Core.Repository.Csv
             _screenings.FindAll(s => s.Cinema == cinema);
 
         public void Add(Models.Screening screening) => _screenings.Add(screening);
+
+        public void UpdateSeatsRemaining(int no, int seatsRemaining)
+        {
+            var screening = _screenings.Find(s => s.ScreeningNo == no);
+            if (screening is null) throw new Exception($"Screening not found for no: {no}");
+
+            screening.SeatsRemaining = seatsRemaining;
+        }
+
         public void Remove(Models.Screening screening) => _screenings.Remove(screening);
 
 

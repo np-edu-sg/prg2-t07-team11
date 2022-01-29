@@ -14,7 +14,7 @@ namespace Core.Models
 
         public static readonly string Header =
             $"{"Title",-30}{"Duration",-10}{"Classification",-18}{"Opening Date",-25}";
-        
+
         public Movie()
         {
         }

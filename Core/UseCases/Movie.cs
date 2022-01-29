@@ -45,7 +45,7 @@ namespace Core.UseCases
                         int idx = 0;
                         movieDictionary.TryGetValue(ticket.Screening.Movie.Title, out idx);
                         movieDictionary.Remove(ticket.Screening.Movie.Title);
-                        movieDictionary.Add(ticket.Screening.Movie.Title, idx+1);
+                        movieDictionary.Add(ticket.Screening.Movie.Title, idx + 1);
                     }
                 }
             }

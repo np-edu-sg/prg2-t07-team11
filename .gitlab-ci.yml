@@ -26,7 +26,7 @@ before_script:
 Format:
   stage: format
   before_script:
-    - dotnet tool install -g dotnet-format --version "7.*" --add-source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet7/nuget/v3/index.json
+    - dotnet tool install -g dotnet-format
   script:
     - dotnet format --verify-no-changes --no-restore ./PRG2_T07_Team11.sln
 

@@ -28,7 +28,7 @@ Format:
   script:
     - dotnet format --verify-no-changes --no-restore ./PRG2_T07_Team11.sln
 
-Testa:
+Test:
   stage: test
   script:
     - dotnet test --no-restore ./PRG2_T07_Team11.sln

@@ -39,7 +39,7 @@ namespace Core.Tests.Models
 
             order.AddTicket(ticket);
 
-            Assert.Equal(new List<Core.Models.Ticket> {ticket}, order.TicketList);
+            Assert.Equal(new List<Core.Models.Ticket> { ticket }, order.TicketList);
         }
     }
 }

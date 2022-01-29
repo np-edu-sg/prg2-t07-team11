@@ -29,7 +29,7 @@ Format:
     - dotnet tool install -g dotnet-format
     - export PATH="$PATH:/root/.dotnet/tools"
   script:
-    - dotnet format --verify-no-changes --no-restore ./PRG2_T07_Team11.sln
+    - dotnet format --check --no-restore ./PRG2_T07_Team11.sln
 
 Test:
   stage: test

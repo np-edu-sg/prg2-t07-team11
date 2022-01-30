@@ -47,8 +47,14 @@ namespace Cli.Display
 
         public void ListAllMovies()
         {
-            _display.Text(Core.Models.Movie.Header);
-            foreach (var movie in _movie.FindAll()) _display.Text(movie);
+            var movies = _movie.FindAll();
+            if (movies.Count == 0)
+            {
+                _display.Text("There are no movies");
+                return;
+            }
+
+            _display.Table(movies, Core.Models.Movie.Header);
         }
 
         public void RecommendTop3Movies()

@@ -119,6 +119,12 @@ namespace Cli.Display
         public void DisplayScreeningSessionsMovie()
         {
             var movies = _movie.FindAll();
+            if (movies.Count == 0)
+            {
+                _display.Text("There are no movies");
+                return;
+            }
+
             var movieIdxInput = _display.InteractiveTableInput(movies, Core.Models.Movie.Header);
             if (movieIdxInput == -1) return;
 
@@ -139,6 +145,12 @@ namespace Cli.Display
         public void RemoveScreening()
         {
             var screenings = _screening.FindAllWithoutTickets();
+            if (screenings.Count == 0)
+            {
+                _display.Text("There are no screenings to delete");
+                return;
+            }
+
             var screeningIdxInput = _display.InteractiveTableInput(screenings, Core.Models.Screening.Header);
             if (screeningIdxInput == -1) return;
 

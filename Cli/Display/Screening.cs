@@ -120,8 +120,9 @@ namespace Cli.Display
             var screeningIdx = _display.InteractiveTableInput(screenings, Core.Models.Screening.Header);
             if (screeningIdx == -1) return;
 
+            _display.Text($"Number of tickets left: {screenings[screeningIdx].SeatsRemaining}");
             var noTickets = _display.Input<int>("Enter number of tickets: ",
-                "There are either not enough seats remaining, or you have entered an invalid number.\nPlease enter a non-zero integer.\n",
+                "There are either not enough seats remaining, or you have entered an invalid number.\nHint: Please enter a non-zero integer.\n",
                 s => int.TryParse(s, out var s2) && 0 < s2 && s2 <= screenings[screeningIdx].SeatsRemaining);
 
             var payable = 0.0;
@@ -141,8 +142,6 @@ namespace Cli.Display
                         $"You must be aged {_classifications[movies[movieIdx].Classification]} and above to watch this movie D:");
                     return;
                 }
-
-                ;
 
                 Ticket ticket;
                 while (true)

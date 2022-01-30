@@ -27,6 +27,7 @@ namespace Cli.Display
             ScreeningType = screening.ScreeningType;
             Cinema = screening.Cinema;
             Movie = screening.Movie;
+            SeatsRemaining = screening.SeatsRemaining;
         }
 
         public override string ToString()

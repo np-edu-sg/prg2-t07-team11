@@ -32,11 +32,6 @@ namespace Core.UseCases
             _screeningRepository.Init();
         }
 
-        public List<Models.Screening> Find()
-        {
-            return _screeningRepository.FindAll();
-        }
-
         public List<Models.Screening> FindAllByMovieTitle(string title)
         {
             return _screeningRepository.FindAllByMovieTitle(title);
@@ -44,7 +39,7 @@ namespace Core.UseCases
 
         public void Add(DateTime dateTime, string screeningType, string cinemaName, int cinemaHallNo, string movieTitle)
         {
-            if (screeningType is not "2D" or "3D") throw new Exception("ScreeningType must be 2D or 3D");
+            if (screeningType != "2D" && screeningType != "3D") throw new Exception("ScreeningType must be 2D or 3D");
 
             var cinema = _cinemaRepository.FindOneByNameAndHallNo(cinemaName, cinemaHallNo);
             if (cinema is null) throw new Exception("Invalid cinema");
@@ -67,8 +62,12 @@ namespace Core.UseCases
                     throw new Exception("Cinema hall is unavailable");
             }
 
-            _screeningRepository.Add(new Models.Screening(_startingIdx + _screeningRepository.FindAll().Count, dateTime,
-                screeningType, cinema, movie));
+            var n = new Models.Screening(_startingIdx + _screeningRepository.FindAll().Count, dateTime,
+                screeningType, cinema, movie)
+            {
+                SeatsRemaining = cinema.Capacity
+            };
+            _screeningRepository.Add(n);
         }
 
         public List<Models.Screening> FindAllWithoutTickets()

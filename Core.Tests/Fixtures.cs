@@ -13,28 +13,31 @@ namespace Core.Tests
 {
     public static class Fixtures
     {
+        public static Cinema Cinema = new("Bishan GV", 1, 100);
+        public static Movie Movie = new("Yay", 1, "G", DateTime.Now, new List<string> { "Happy" });
+
         public static List<Screening> Screenings = new()
         {
             new Screening(
-                21,
+                1001,
                 DateTime.Now,
                 "3D",
-                new Cinema(),
-                new Movie()
+                Cinema,
+                Movie
             ),
             new Screening(
-                22,
+                1002,
                 DateTime.Now,
                 "2D",
-                new Cinema(),
-                new Movie()
+                Cinema,
+                Movie
             ),
             new Screening(
-                23,
+                1003,
                 DateTime.Now,
                 "3D",
-                new Cinema(),
-                new Movie()
+                Cinema,
+                Movie
             )
         };
 

@@ -20,6 +20,8 @@ namespace Core.Repository.Csv
         private readonly string _path;
 
         private readonly List<Models.Screening> _screenings = new();
+
+        // For convenience; The tickets will be stored by reference, so it should be alright
         private readonly List<Ticket> _tickets = new();
 
         public Screening(string path, IMovie movie, ICinema cinema)

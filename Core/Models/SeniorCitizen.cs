@@ -51,7 +51,7 @@ namespace Core.Models
                 switch (day)
                 {
                     case DayOfWeek.MonToThurs:
-                        return 5;
+                        return 6;
                     case DayOfWeek.FriToSun:
                         return 14;
                 }
@@ -60,7 +60,7 @@ namespace Core.Models
                 switch (day)
                 {
                     case DayOfWeek.MonToThurs:
-                        return 7;
+                        return 5;
                     case DayOfWeek.FriToSun:
                         return 12.50;
                 }

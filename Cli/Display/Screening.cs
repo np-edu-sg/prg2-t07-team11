@@ -12,6 +12,30 @@ using Order = Core.UseCases.Order;
 
 namespace Cli.Display
 {
+    /// <summary>
+    /// This is a class to show a custom header for Screening to be used with IDisplay.Table
+    /// </summary>
+    public class CustomScreening : Core.Models.Screening
+    {
+        public static new string Header =
+            $"{"Movie Title",-30}{"Cinema",-15}{"Hall No",-10}{"Screening Type",-16}{"Date and Time",-25}{"Seats Remaining",-17}";
+
+        public CustomScreening(Core.Models.Screening screening)
+        {
+            ScreeningNo = screening.ScreeningNo;
+            ScreeningDateTime = screening.ScreeningDateTime;
+            ScreeningType = screening.ScreeningType;
+            Cinema = screening.Cinema;
+            Movie = screening.Movie;
+        }
+
+        public override string ToString()
+        {
+            return
+                $"{Movie.Title,-30}{Cinema.Name,-15}{Cinema.HallNo,-10}{ScreeningType,-16}{ScreeningDateTime,-25}{SeatsRemaining,-17}";
+        }
+    }
+
     public class Screening
     {
         private readonly Core.UseCases.Cinema _cinema;
@@ -54,11 +78,6 @@ namespace Cli.Display
             _display.Text("Loaded screening data!");
         }
 
-        public void ListAllScreenings()
-        {
-            foreach (var screening in _screening.Find()) _display.Text(screening);
-        }
-
         public void AddScreening()
         {
             var movies = _movie.FindAll();
@@ -95,6 +114,7 @@ namespace Cli.Display
             _display.Text("Successfully Added Screening Session");
         }
 
+        // Richard did this
         public void DisplayScreeningSessionsMovie()
         {
             var movies = _movie.FindAll();
@@ -102,7 +122,17 @@ namespace Cli.Display
             if (movieIdxInput == -1) return;
 
             var screenings = _screening.FindAllByMovieTitle(movies[movieIdxInput].Title);
-            _display.Table(screenings, Core.Models.Screening.Header);
+
+            if (screenings.Count == 0)
+            {
+                _display.Text($"There are no screenings for {movies[movieIdxInput].Title}");
+                return;
+            }
+
+            var customScreenings = new List<CustomScreening>();
+            foreach (var s in screenings) customScreenings.Add(new CustomScreening(s));
+
+            _display.Table(customScreenings, CustomScreening.Header);
         }
 
         public void RemoveScreening()

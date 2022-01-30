@@ -138,8 +138,10 @@ namespace Cli.Display
                         break;
                     case ConsoleKey.Escape:
                     case ConsoleKey.F4:
+                        Console.WriteLine();
                         return -1;
                     case ConsoleKey.Enter:
+                        Console.WriteLine();
                         return selected;
                     default:
                         throw new Exception("What?");

@@ -71,7 +71,7 @@ namespace Cli.Display
                         _movie.ListAllMovies();
                         break;
                     case 3:
-                        _screening.ListAllScreenings();
+                        _screening.DisplayScreeningSessionsMovie();
                         break;
                     case 4:
                         _screening.AddScreening();

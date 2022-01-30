@@ -9,22 +9,22 @@ using System.Collections.Generic;
 
 namespace Cli.Display
 {
-    public struct MovieLeaderboard
+    public struct MovieLeaderboardItem
     {
         public int Pos { get; set; }
-        public string Name { get; set; }
+        public string Title { get; set; }
         public int TicketsSold { get; set; }
 
-        public static string Header = $"{"Pos",-5}{"Name",-15}{"Tickets sold",-4}";
+        public static string Header = $"{"Pos",-5}{"Movie Title",-30}{"Tickets sold",-4}";
 
-        public MovieLeaderboard(int pos, string name, int ticketsSold)
+        public MovieLeaderboardItem(int pos, string name, int ticketsSold)
         {
-            (Pos, Name, TicketsSold) = (pos, name, ticketsSold);
+            (Pos, Title, TicketsSold) = (pos, name, ticketsSold);
         }
 
         public override string ToString()
         {
-            return $"{Pos,-5}{Name,-15}{TicketsSold,-4}";
+            return $"{Pos,-5}{Title,-30}{TicketsSold,-4}";
         }
     }
 
@@ -61,14 +61,14 @@ namespace Cli.Display
                 return;
             }
 
-            var (m, idx) = (new List<MovieLeaderboard>(), 1);
+            var (m, idx) = (new List<MovieLeaderboardItem>(), 1);
             foreach (var (key, value) in top)
             {
-                m.Add(new MovieLeaderboard(idx, key, value));
+                m.Add(new MovieLeaderboardItem(idx, key, value));
                 idx++;
             }
 
-            _display.Table(m, MovieLeaderboard.Header);
+            _display.Table(m, MovieLeaderboardItem.Header);
         }
     }
 }

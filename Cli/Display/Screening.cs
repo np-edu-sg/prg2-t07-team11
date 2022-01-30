@@ -43,10 +43,10 @@ namespace Cli.Display
 
         private readonly Dictionary<string, int> _classifications = new()
         {
-            {"PG13", 13},
-            {"NC16", 16},
-            {"M18", 18},
-            {"R21", 21}
+            { "PG13", 13 },
+            { "NC16", 16 },
+            { "M18", 18 },
+            { "R21", 21 }
         };
 
         private readonly IDisplay _display;
@@ -54,8 +54,8 @@ namespace Cli.Display
         private readonly Order _order;
         private readonly Core.UseCases.Screening _screening;
 
-        private readonly List<string> _study = new() {"Primary", "Secondary", "Tertiary"};
-        private readonly List<string> _ticketType = new() {"Student", "Senior Citizen", "Adult"};
+        private readonly List<string> _study = new() { "Primary", "Secondary", "Tertiary" };
+        private readonly List<string> _ticketType = new() { "Student", "Senior Citizen", "Adult" };
 
         public Screening(
             IDisplay display,
@@ -270,7 +270,7 @@ namespace Cli.Display
                 _display.Text("There are no orders to cancel");
                 return;
             }
-            
+
             var orderNo = _display.Input<int>("Enter your order number: ", "Invalid order number",
                 s => int.TryParse(s, out var s2) && _order.FindByNo(s2) is not null);
             var order = _order.FindByNo(orderNo);

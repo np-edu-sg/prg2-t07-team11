@@ -274,7 +274,6 @@ namespace Cli.Display
                 _order.Cancel(orderNo);
                 _display.Text($"You have been refunded ${order.Amount} for order no {orderNo}");
                 _display.Text($"You have successfully cancelled order no {orderNo}");
-                _order.FindAll().ForEach(Console.WriteLine);
             }
             catch (Exception ex)
             {

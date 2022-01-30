@@ -18,10 +18,10 @@ namespace Cli.Display
 
         private readonly Dictionary<string, int> _classifications = new()
         {
-            { "PG13", 13 },
-            { "NC16", 16 },
-            { "M18", 18 },
-            { "R21", 21 }
+            {"PG13", 13},
+            {"NC16", 16},
+            {"M18", 18},
+            {"R21", 21}
         };
 
         private readonly IDisplay _display;
@@ -29,8 +29,8 @@ namespace Cli.Display
         private readonly Order _order;
         private readonly Core.UseCases.Screening _screening;
 
-        private readonly List<string> _study = new() { "Primary", "Secondary", "Tertiary" };
-        private readonly List<string> _ticketType = new() { "Student", "Senior Citizen", "Adult" };
+        private readonly List<string> _study = new() {"Primary", "Secondary", "Tertiary"};
+        private readonly List<string> _ticketType = new() {"Student", "Senior Citizen", "Adult"};
 
         public Screening(
             IDisplay display,
@@ -100,13 +100,11 @@ namespace Cli.Display
             var movies = _movie.FindAll();
             var movieIdxInput = _display.InteractiveTableInput(movies, Core.Models.Movie.Header);
             if (movieIdxInput == -1) return;
-            var movie = _screening.FindAllByMovieTitle(movies[movieIdxInput].Title);
-            Console.WriteLine($"{"Movie Title",-30}{"Cinema",-15}{"Hall No",-10}{"Screening Type",-16}{"Date and Time",-25}{"Seats Remaining",-10}");
-            foreach (var screening in movie)
-            {
-                Console.WriteLine($"{screening.Movie.Title,-30}{screening.Cinema.Name,-15}{screening.Cinema.HallNo,-10}{screening.ScreeningType,-16}{screening.ScreeningDateTime,-25}{screening.SeatsRemaining}");
-            }
+            
+            var screenings = _screening.FindAllByMovieTitle(movies[movieIdxInput].Title);
+            _display.Table(screenings, Core.Models.Screening.Header);
         }
+
         public void RemoveScreening()
         {
             var screenings = _screening.FindAllWithoutTickets();

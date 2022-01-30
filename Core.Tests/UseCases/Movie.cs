@@ -7,22 +7,25 @@ namespace Core.Tests.UseCases
     public class Movie
     {
         public Mock<IMovie> MovieRepositoryMock { get; set; }
+        public Mock<IOrder> OrderRepositoryMock { get; set; }
 
         public Movie()
         {
             MovieRepositoryMock = new Mock<IMovie>();
+            OrderRepositoryMock = new Mock<IOrder>();
         }
 
         [Fact]
         public void Constructor_DoesNotThrow()
         {
-            Assert.Null(Record.Exception(() => new Core.UseCases.Movie(MovieRepositoryMock.Object)));
+            Assert.Null(Record.Exception(() =>
+                new Core.UseCases.Movie(MovieRepositoryMock.Object, OrderRepositoryMock.Object)));
         }
 
         [Fact]
         public void LoadData_CallsRepositoryInit()
         {
-            var movie = new Core.UseCases.Movie(MovieRepositoryMock.Object);
+            var movie = new Core.UseCases.Movie(MovieRepositoryMock.Object, OrderRepositoryMock.Object);
             movie.LoadData();
 
             MovieRepositoryMock.Verify((c) => c.Init(), Times.Once());
@@ -31,7 +34,7 @@ namespace Core.Tests.UseCases
         [Fact]
         public void FindAll_CallsRepositoryFindAll()
         {
-            var movie = new Core.UseCases.Movie(MovieRepositoryMock.Object);
+            var movie = new Core.UseCases.Movie(MovieRepositoryMock.Object, OrderRepositoryMock.Object);
             movie.FindAll();
 
             MovieRepositoryMock.Verify(c => c.FindAll(), Times.Once());

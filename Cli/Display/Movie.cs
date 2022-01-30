@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using Core.Repository;
 
 namespace Cli.Display
@@ -23,6 +25,18 @@ namespace Cli.Display
         {
             _display.Text(Core.Models.Movie.Header);
             foreach (var movie in _movie.FindAll()) _display.Text(movie);
+        }
+
+        public void RecommendTop3Movie()
+        {
+            var top = _movie.RecommendedMovieBasedInTickets();
+            var idx = 1;
+            Console.WriteLine("Top 3 movies based on tickets sold");
+            foreach (var kvp in top)
+            {
+                Console.WriteLine($"{idx,-5}{kvp.Key}");
+                idx++;
+            }
         }
     }
 }

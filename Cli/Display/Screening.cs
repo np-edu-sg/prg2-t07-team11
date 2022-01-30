@@ -265,6 +265,12 @@ namespace Cli.Display
 
         public void CancelOrder()
         {
+            if (_order.FindAll().Count == 0)
+            {
+                _display.Text("There are no orders to cancel");
+                return;
+            }
+            
             var orderNo = _display.Input<int>("Enter your order number: ", "Invalid order number",
                 s => int.TryParse(s, out var s2) && _order.FindByNo(s2) is not null);
             var order = _order.FindByNo(orderNo);

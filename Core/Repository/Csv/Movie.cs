@@ -24,6 +24,7 @@ namespace Core.Repository.Csv
 
         public void Init()
         {
+            if (_movies.Count != 0) return;
             if (string.IsNullOrWhiteSpace(_path)) throw new Exception("Bad path");
 
             try

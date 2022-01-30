@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Cli.Display
 {
@@ -116,7 +117,7 @@ namespace Cli.Display
 
                 Console.BackgroundColor = ConsoleColor.DarkGray;
                 Console.ForegroundColor = ConsoleColor.Black;
-                Console.WriteLine("Press ESC or F4 to escape input");
+                Console.WriteLine("Press ESC or F4 to cancel");
 
                 Console.ResetColor();
 
@@ -151,22 +152,38 @@ namespace Cli.Display
 
         public T Input<T>(string message, string error, Predicate<string> validator)
         {
+            Console.WriteLine();
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.WriteLine("Enter 'escape' to cancel");
+            Console.ResetColor();
+
             string input;
             while (true)
             {
                 Console.Write(message);
                 input = Console.ReadLine();
+                if (input == "escape") throw new Exception("User cancelled");
                 if (validator(input)) break;
                 Console.WriteLine(error);
             }
 
-            return (T)Convert.ChangeType(input, typeof(T));
+            return (T) Convert.ChangeType(input, typeof(T));
         }
 
         public T Input<T>(string message)
         {
+            Console.WriteLine();
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.WriteLine("Enter 'escape' to escape input");
+            Console.ResetColor();
+
             Console.Write(message);
-            return (T)Convert.ChangeType(Console.ReadLine(), typeof(T));
+            var input = Console.ReadLine();
+            if (input == "escape") throw new Exception("User cancelled");
+
+            return (T) Convert.ChangeType(input, typeof(T));
         }
 
         public int MenuInput(List<string> items, string message, string error)

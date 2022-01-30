@@ -240,7 +240,7 @@ namespace Cli.Display
 
                 tickets.Add(ticket);
 
-                // This should be in the use case but I'll change it later
+                payable += ticket.CalculatePrice();
                 if (ticket != default(Ticket)) payable += ticket.CalculatePrice();
             }
 

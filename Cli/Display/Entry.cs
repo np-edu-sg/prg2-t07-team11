@@ -55,39 +55,46 @@ namespace Cli.Display
                 var option = _display.MenuInput(rootMenu, "Enter your option: ", "Please enter a valid option");
                 Console.WriteLine();
 
-                switch (option)
+                try
                 {
-                    case -1:
-                        _hostApplicationLifetime.StopApplication();
-                        return Task.CompletedTask;
-                    case 0:
-                        _movie.LoadData();
-                        _cinema.LoadData();
-                        break;
-                    case 1:
-                        _screening.LoadData();
-                        break;
-                    case 2:
-                        _movie.ListAllMovies();
-                        break;
-                    case 3:
-                        _screening.DisplayScreeningSessionsMovie();
-                        break;
-                    case 4:
-                        _screening.AddScreening();
-                        break;
-                    case 5:
-                        _screening.RemoveScreening();
-                        break;
-                    case 6:
-                        _screening.OrderTickets();
-                        break;
-                    case 7:
-                        _screening.CancelOrder();
-                        break;
-                    case 8:
-                        _movie.RecommendTop3Movies();
-                        break;
+                    switch (option)
+                    {
+                        case -1:
+                            _hostApplicationLifetime.StopApplication();
+                            return Task.CompletedTask;
+                        case 0:
+                            _movie.LoadData();
+                            _cinema.LoadData();
+                            break;
+                        case 1:
+                            _screening.LoadData();
+                            break;
+                        case 2:
+                            _movie.ListAllMovies();
+                            break;
+                        case 3:
+                            _screening.DisplayScreeningSessionsMovie();
+                            break;
+                        case 4:
+                            _screening.AddScreening();
+                            break;
+                        case 5:
+                            _screening.RemoveScreening();
+                            break;
+                        case 6:
+                            _screening.OrderTickets();
+                            break;
+                        case 7:
+                            _screening.CancelOrder();
+                            break;
+                        case 8:
+                            _movie.RecommendTop3Movies();
+                            break;
+                    }
+                }
+                catch (Exception)
+                {
+                    // ignored as exceptions will be from user input cancellation
                 }
             }
 

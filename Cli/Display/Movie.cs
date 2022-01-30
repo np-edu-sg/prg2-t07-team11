@@ -1,9 +1,24 @@
 using System;
 using System.Collections.Generic;
 using Core.Repository;
+using Microsoft.Extensions.Options;
 
 namespace Cli.Display
 {
+    public struct MovieLeaderboard
+    {
+        public int Pos { get; set; }
+        public string Name { get; set; }
+        public int TicketsSold { get; set; }
+
+        public static string Header = $"{"Pos",-5}{"Name",-15}{"Tickets sold",-4}";
+
+        public MovieLeaderboard(int pos, string name, int ticketsSold) =>
+            (Pos, Name, TicketsSold) = (pos, name, ticketsSold);
+
+        public override string ToString() => $"{Pos,-5}{Name,-15}{TicketsSold,-4}";
+    }
+
     public class Movie
     {
         private readonly IDisplay _display;
@@ -27,16 +42,24 @@ namespace Cli.Display
             foreach (var movie in _movie.FindAll()) _display.Text(movie);
         }
 
-        public void RecommendTop3Movie()
+        public void RecommendTop3Movies()
         {
-            var top = _movie.RecommendedMovieBasedInTickets();
-            var idx = 1;
-            Console.WriteLine("Top 3 movies based on tickets sold");
-            foreach (var kvp in top)
+            var top = _movie.Top3Movies();
+
+            if (top.Count == 0)
             {
-                Console.WriteLine($"{idx,-5}{kvp.Key}");
+                _display.Text("No recommendations yet, order a ticket first.");
+                return;
+            }
+
+            var (m, idx) = (new List<MovieLeaderboard>(), 1);
+            foreach (var (key, value) in top)
+            {
+                m.Add(new MovieLeaderboard(idx, key, value));
                 idx++;
             }
+
+            _display.Table(m, MovieLeaderboard.Header);
         }
     }
 }

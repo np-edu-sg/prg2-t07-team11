@@ -23,7 +23,7 @@ namespace Core.UseCases
             return _movieRepository.FindAll();
         }
 
-        public Dictionary<string, int> RecommendedMovieBasedInTickets()
+        public Dictionary<string, int> Top3Movies()
         {
             var movieTitleList = new List<string>();
             Dictionary<string, int> movieDictionary = new Dictionary<string, int>();

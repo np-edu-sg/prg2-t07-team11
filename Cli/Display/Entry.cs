@@ -78,7 +78,7 @@ namespace Cli.Display
                         _screening.CancelOrder();
                         break;
                     case 8:
-                        _movie.RecommendTop3Movie();
+                        _movie.RecommendTop3Movies();
                         break;
                 }
             }

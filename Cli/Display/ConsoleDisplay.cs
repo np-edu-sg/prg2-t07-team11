@@ -40,6 +40,29 @@ namespace Cli.Display
             Console.ResetColor();
         }
 
+        public void Table<T>(List<T> list, string header)
+        {
+            Console.Clear();
+
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.ForegroundColor = ConsoleColor.White;
+
+            Console.WriteLine(header);
+
+            Console.ResetColor();
+
+            foreach (var t in list)
+            {
+                Console.WriteLine(t);
+                Console.ResetColor();
+            }
+
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.ForegroundColor = ConsoleColor.Black;
+
+            Console.ResetColor();
+        }
+
         public int InteractiveTableInput<T>(List<T> list, string header)
         {
             var width = _window.Width;

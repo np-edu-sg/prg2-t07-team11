@@ -9,6 +9,7 @@ namespace Cli.Display
         public void Text(object s);
         public void Error(object s);
         public void Header(object s);
+        public void Table<T>(List<T> list, string header);
 
 
         public T Input<T>(string message, string error, Predicate<string> validator);

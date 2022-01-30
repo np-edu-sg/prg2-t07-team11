@@ -1,20 +1,23 @@
-﻿using System;
+//============================================================
+// Student Number : S10219526, S10227463
+// Student Name : Qin Guan, Richard Paul Pamintuan
+// Module Group : T07
+//============================================================
+
+
+using System;
 using System.Collections.Generic;
-using System.Data;
-using FluentAssertions;
-using Xunit;
-using Moq;
 using Core.Models;
 using Core.Repository;
+using FluentAssertions;
+using Moq;
+using Xunit;
 
 namespace Core.Tests.UseCases
 {
     public class Order
     {
         public DateTime Now = DateTime.Now;
-        public Mock<IOrder> OrderRepositoryMock { get; set; }
-        public Mock<IScreening> ScreeningRepositoryMock { get; set; }
-        public Mock<IDateTimeProvider> DateTimeProviderMock { get; set; }
 
         public Order()
         {
@@ -23,6 +26,10 @@ namespace Core.Tests.UseCases
             DateTimeProviderMock = new Mock<IDateTimeProvider>();
             DateTimeProviderMock.Setup(d => d.Now()).Returns(Now);
         }
+
+        public Mock<IOrder> OrderRepositoryMock { get; set; }
+        public Mock<IScreening> ScreeningRepositoryMock { get; set; }
+        public Mock<IDateTimeProvider> DateTimeProviderMock { get; set; }
 
         [Fact]
         public void Constructor_DoesNotThrow()

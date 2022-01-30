@@ -1,9 +1,14 @@
-﻿namespace Core.Models
+//============================================================
+// Student Number : S10219526, S10227463
+// Student Name : Qin Guan, Richard Paul Pamintuan
+// Module Group : T07
+//============================================================
+
+
+namespace Core.Models
 {
     public abstract class Ticket
     {
-        public Screening Screening { get; set; }
-
         public Ticket()
         {
         }
@@ -13,7 +18,8 @@
             Screening = screening;
         }
 
-        public abstract double CalculatePrice();
+        public Screening Screening { get; set; }
 
+        public abstract double CalculatePrice();
     }
 }

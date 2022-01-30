@@ -1,7 +1,11 @@
-using System;
+//============================================================
+// Student Number : S10219526, S10227463
+// Student Name : Qin Guan, Richard Paul Pamintuan
+// Module Group : T07
+//============================================================
+
+
 using System.Collections.Generic;
-using Core.Repository;
-using Microsoft.Extensions.Options;
 
 namespace Cli.Display
 {
@@ -13,10 +17,15 @@ namespace Cli.Display
 
         public static string Header = $"{"Pos",-5}{"Name",-15}{"Tickets sold",-4}";
 
-        public MovieLeaderboard(int pos, string name, int ticketsSold) =>
+        public MovieLeaderboard(int pos, string name, int ticketsSold)
+        {
             (Pos, Name, TicketsSold) = (pos, name, ticketsSold);
+        }
 
-        public override string ToString() => $"{Pos,-5}{Name,-15}{TicketsSold,-4}";
+        public override string ToString()
+        {
+            return $"{Pos,-5}{Name,-15}{TicketsSold,-4}";
+        }
     }
 
     public class Movie

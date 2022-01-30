@@ -1,15 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿//============================================================
+// Student Number : S10219526, S10227463
+// Student Name : Qin Guan, Richard Paul Pamintuan
+// Module Group : T07
+//============================================================
+
+
+using System;
 
 namespace Core
 {
     public enum DayOfWeek
     {
         MonToThurs,
-        FriToSun,
+        FriToSun
     }
 
     public static class Extension

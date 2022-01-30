@@ -1,4 +1,11 @@
-﻿using System;
+//============================================================
+// Student Number : S10219526, S10227463
+// Student Name : Qin Guan, Richard Paul Pamintuan
+// Module Group : T07
+//============================================================
+
+
+using System;
 using System.Collections.Generic;
 using Core.Models;
 
@@ -28,7 +35,7 @@ namespace Core.Tests
                 "3D",
                 new Cinema(),
                 new Movie()
-            ),
+            )
         };
 
         public static List<Ticket> Tickets = new()
@@ -55,7 +62,7 @@ namespace Core.Tests
             new Order(4, DateTime.Now)
             {
                 TicketList = Tickets
-            },
+            }
         };
     }
 }

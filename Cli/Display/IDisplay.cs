@@ -1,4 +1,11 @@
-﻿using System;
+//============================================================
+// Student Number : S10219526, S10227463
+// Student Name : Qin Guan, Richard Paul Pamintuan
+// Module Group : T07
+//============================================================
+
+
+using System;
 using System.Collections.Generic;
 
 namespace Cli.Display
@@ -16,12 +23,14 @@ namespace Cli.Display
         public T Input<T>(string message);
 
         /// <summary>
-        /// MenuInput should show a menu with option 0 as exit.
+        ///     MenuInput should show a menu with option 0 as exit.
         /// </summary>
         /// <param name="items"></param>
         /// <param name="message"></param>
         /// <param name="error"></param>
-        /// <returns>An integer representing the selected index of <param name="items"></param></returns>
+        /// <returns>An integer representing the selected index of
+        ///     <param name="items"></param>
+        /// </returns>
         public int MenuInput(List<string> items, string message, string error);
 
         public int InteractiveTableInput<T>(List<T> list, string header);

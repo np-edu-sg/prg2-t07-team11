@@ -1,4 +1,11 @@
-﻿using System.Collections.Generic;
+﻿//============================================================
+// Student Number : S10219526, S10227463
+// Student Name : Qin Guan, Richard Paul Pamintuan
+// Module Group : T07
+//============================================================
+
+
+using System.Collections.Generic;
 using Core.Repository;
 
 namespace Core.UseCases
@@ -12,7 +19,10 @@ namespace Core.UseCases
             _cinemaRepository = cinemaRepository;
         }
 
-        public void LoadData() => _cinemaRepository.Init();
+        public void LoadData()
+        {
+            _cinemaRepository.Init();
+        }
 
         public List<Models.Cinema> FindAll()
         {

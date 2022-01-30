@@ -1,24 +1,32 @@
-﻿using System;
+//============================================================
+// Student Number : S10219526, S10227463
+// Student Name : Qin Guan, Richard Paul Pamintuan
+// Module Group : T07
+//============================================================
+
+
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Core.Models;
 using Microsoft.Extensions.Hosting;
 
 namespace Cli.Display
 {
     public class Entry : BackgroundService
     {
-        private readonly IHostApplicationLifetime _hostApplicationLifetime;
-        private readonly IDisplay _display;
-        private readonly Movie _movie;
         private readonly Cinema _cinema;
+        private readonly IDisplay _display;
+        private readonly IHostApplicationLifetime _hostApplicationLifetime;
+        private readonly Movie _movie;
         private readonly Screening _screening;
 
         public Entry(IHostApplicationLifetime hostApplicationLifetime, IDisplay display, Movie movie, Cinema cinema,
-            Screening screening) =>
+            Screening screening)
+        {
             (_hostApplicationLifetime, _display, _movie, _cinema, _screening) =
-            (hostApplicationLifetime, display, movie, cinema, screening);
+                (hostApplicationLifetime, display, movie, cinema, screening);
+        }
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
@@ -32,7 +40,7 @@ namespace Cli.Display
                 "Delete a movie screening session",
                 "Order movie tickets",
                 "Cancel order of ticket",
-                "Recommend movies",
+                "Recommend movies"
             };
 
             _display.Clear();

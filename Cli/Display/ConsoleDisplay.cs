@@ -1,4 +1,11 @@
-﻿using System;
+//============================================================
+// Student Number : S10219526, S10227463
+// Student Name : Qin Guan, Richard Paul Pamintuan
+// Module Group : T07
+//============================================================
+
+
+using System;
 using System.Collections.Generic;
 
 namespace Cli.Display
@@ -12,8 +19,15 @@ namespace Cli.Display
             _window = window;
         }
 
-        public void Clear() => Console.Clear();
-        public void Text(object s) => Console.WriteLine(s);
+        public void Clear()
+        {
+            Console.Clear();
+        }
+
+        public void Text(object s)
+        {
+            Console.WriteLine(s);
+        }
 
         public void Error(object s)
         {
@@ -33,7 +47,7 @@ namespace Cli.Display
             for (var idx = 0; idx < s.ToString()!.Length + 2; idx++) line += "-";
 
             Console.WriteLine($"/{line}\\");
-            Console.WriteLine($"| {s.ToString()} |");
+            Console.WriteLine($"| {s} |");
             Console.WriteLine($"\\{line}/");
             Console.WriteLine();
 

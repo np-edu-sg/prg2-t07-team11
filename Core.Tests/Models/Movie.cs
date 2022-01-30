@@ -1,6 +1,13 @@
-﻿using System;
+﻿//============================================================
+// Student Number : S10219526, S10227463
+// Student Name : Qin Guan, Richard Paul Pamintuan
+// Module Group : T07
+//============================================================
+
+
+using System;
 using System.Collections.Generic;
-using Core.Repository.Csv;
+using Core.Models;
 using Xunit;
 
 namespace Core.Tests.Models
@@ -29,7 +36,7 @@ namespace Core.Tests.Models
             Assert.Equal("3D", movie.Classification);
             Assert.Equal(dateTime, movie.OpeningDate);
             Assert.Equal(new List<string> { "genre" }, movie.GenreList);
-            Assert.Equal(new List<Core.Models.Screening>(), movie.ScreeningList);
+            Assert.Equal(new List<Screening>(), movie.ScreeningList);
         }
 
         [Fact]
@@ -48,11 +55,11 @@ namespace Core.Tests.Models
         {
             var movie = new Core.Models.Movie();
 
-            var screening = new Core.Models.Screening(1, DateTime.Now, "3D", new Core.Models.Cinema(),
+            var screening = new Screening(1, DateTime.Now, "3D", new Core.Models.Cinema(),
                 new Core.Models.Movie());
             movie.AddScreening(screening);
 
-            Assert.Equal(new List<Core.Models.Screening> { screening }, movie.ScreeningList);
+            Assert.Equal(new List<Screening> { screening }, movie.ScreeningList);
         }
     }
 }

@@ -1,16 +1,16 @@
-﻿using System;
+//============================================================
+// Student Number : S10219526, S10227463
+// Student Name : Qin Guan, Richard Paul Pamintuan
+// Module Group : T07
+//============================================================
+
+
+using System;
 
 namespace Core.Models
 {
     public class Screening
     {
-        public int ScreeningNo { get; set; }
-        public DateTime ScreeningDateTime { get; set; }
-        public string ScreeningType { get; set; }
-        public int SeatsRemaining { get; set; }
-        public Cinema Cinema { get; set; }
-        public Movie Movie { get; set; }
-
         public static string Header = $"{"Movie Title",-30}{"Cinema",-15}{"Screening Type",-10}{"Date and Time",-25}";
 
         public Screening()
@@ -25,6 +25,13 @@ namespace Core.Models
             Cinema = cinema;
             Movie = movie;
         }
+
+        public int ScreeningNo { get; set; }
+        public DateTime ScreeningDateTime { get; set; }
+        public string ScreeningType { get; set; }
+        public int SeatsRemaining { get; set; }
+        public Cinema Cinema { get; set; }
+        public Movie Movie { get; set; }
 
         public override string ToString()
         {

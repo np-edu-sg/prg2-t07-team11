@@ -1,5 +1,13 @@
-﻿using System;
+﻿//============================================================
+// Student Number : S10219526, S10227463
+// Student Name : Qin Guan, Richard Paul Pamintuan
+// Module Group : T07
+//============================================================
+
+
+using System;
 using System.Collections.Generic;
+using Core.Models;
 using Xunit;
 
 namespace Core.Tests.Models
@@ -33,13 +41,13 @@ namespace Core.Tests.Models
         {
             var order = new Core.Models.Order();
 
-            var screening = new Core.Models.Screening(1, DateTime.Now, "3D", new Core.Models.Cinema(),
+            var screening = new Screening(1, DateTime.Now, "3D", new Core.Models.Cinema(),
                 new Core.Models.Movie());
             var ticket = new Core.Models.Adult(screening, true);
 
             order.AddTicket(ticket);
 
-            Assert.Equal(new List<Core.Models.Ticket> { ticket }, order.TicketList);
+            Assert.Equal(new List<Ticket> { ticket }, order.TicketList);
         }
     }
 }

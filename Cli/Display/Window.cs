@@ -1,5 +1,11 @@
-﻿using System;
-using System.Text;
+﻿//============================================================
+// Student Number : S10219526, S10227463
+// Student Name : Qin Guan, Richard Paul Pamintuan
+// Module Group : T07
+//============================================================
+
+
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
@@ -8,21 +14,28 @@ namespace Cli.Display
 {
     public class ResizeEventArgs
     {
+        public ResizeEventArgs(int width, int height)
+        {
+            (Width, Height) = (width, height);
+        }
+
         public int Width { get; set; }
         public int Height { get; set; }
-        public ResizeEventArgs(int width, int height) => (Width, Height) = (width, height);
     }
 
     public class Window : BackgroundService
     {
+        public delegate void ResizeEventHandler(object sender, ResizeEventArgs args);
+
+        public Window()
+        {
+            ResizeEvent += Handler;
+        }
+
         public int Width { get; set; }
         public int Height { get; set; }
 
         public event ResizeEventHandler ResizeEvent;
-
-        public delegate void ResizeEventHandler(object sender, ResizeEventArgs args);
-
-        public Window() => ResizeEvent += Handler;
 
         private void Handler(object sender, ResizeEventArgs args)
         {

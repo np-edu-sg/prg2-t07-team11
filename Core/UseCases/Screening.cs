@@ -1,4 +1,11 @@
-﻿using System;
+//============================================================
+// Student Number : S10219526, S10227463
+// Student Name : Qin Guan, Richard Paul Pamintuan
+// Module Group : T07
+//============================================================
+
+
+using System;
 using System.Collections.Generic;
 using Core.Repository;
 
@@ -6,11 +13,11 @@ namespace Core.UseCases
 {
     public class Screening
     {
-        private readonly IScreening _screeningRepository;
         private readonly ICinema _cinemaRepository;
-        private readonly IMovie _movieRepository;
 
         private readonly TimeSpan _cleaningTime = new(0, 0, 30, 0);
+        private readonly IMovie _movieRepository;
+        private readonly IScreening _screeningRepository;
         private readonly int _startingIdx = 1001;
 
         public Screening(IScreening screeningRepository, ICinema cinemaRepository, IMovie movieRepository)
@@ -20,15 +27,20 @@ namespace Core.UseCases
             _movieRepository = movieRepository;
         }
 
-        public void LoadData() => _screeningRepository.Init();
+        public void LoadData()
+        {
+            _screeningRepository.Init();
+        }
 
         public List<Models.Screening> Find()
         {
             return _screeningRepository.FindAll();
         }
 
-        public List<Models.Screening> FindAllByMovieTitle(string title) =>
-            _screeningRepository.FindAllByMovieTitle(title);
+        public List<Models.Screening> FindAllByMovieTitle(string title)
+        {
+            return _screeningRepository.FindAllByMovieTitle(title);
+        }
 
         public void Add(DateTime dateTime, string screeningType, string cinemaName, int cinemaHallNo, string movieTitle)
         {

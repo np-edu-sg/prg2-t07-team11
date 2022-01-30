@@ -1,4 +1,11 @@
-﻿using System;
+﻿//============================================================
+// Student Number : S10219526, S10227463
+// Student Name : Qin Guan, Richard Paul Pamintuan
+// Module Group : T07
+//============================================================
+
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -6,8 +13,8 @@ namespace Core.Repository.Csv
 {
     public class Cinema : ICinema
     {
-        private readonly string _path;
         private readonly List<Models.Cinema> _cinemas = new();
+        private readonly string _path;
 
         public Cinema(string path)
         {

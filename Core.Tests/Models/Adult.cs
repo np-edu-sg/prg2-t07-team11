@@ -1,4 +1,11 @@
-﻿using System;
+//============================================================
+// Student Number : S10219526, S10227463
+// Student Name : Qin Guan, Richard Paul Pamintuan
+// Module Group : T07
+//============================================================
+
+
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using Core.Models;
@@ -13,14 +20,14 @@ namespace Core.Tests.Models
             new object[] {DateTime.Parse("24/1/2022", new CultureInfo("en-SG"))},
             new object[] {DateTime.Parse("25/1/2022", new CultureInfo("en-SG"))},
             new object[] {DateTime.Parse("26/1/2022", new CultureInfo("en-SG"))},
-            new object[] {DateTime.Parse("27/1/2022", new CultureInfo("en-SG"))},
+            new object[] {DateTime.Parse("27/1/2022", new CultureInfo("en-SG"))}
         };
 
         public static IEnumerable<object[]> CalculatePrice_FriSun = new[]
         {
             new object[] {DateTime.Parse("28/1/2022", new CultureInfo("en-SG"))},
             new object[] {DateTime.Parse("29/1/2022", new CultureInfo("en-SG"))},
-            new object[] {DateTime.Parse("30/1/2022", new CultureInfo("en-SG"))},
+            new object[] {DateTime.Parse("30/1/2022", new CultureInfo("en-SG"))}
         };
 
 
@@ -46,7 +53,8 @@ namespace Core.Tests.Models
             Assert.False(adult.PopcornOffer);
         }
 
-        [Theory, MemberData(nameof(CalculatePrice_MonThurs))]
+        [Theory]
+        [MemberData(nameof(CalculatePrice_MonThurs))]
         public void CalculatePrice_2D_MonThurs_NoPopcorn_Valid(DateTime dateTime)
         {
             var screening = new Screening
@@ -60,7 +68,8 @@ namespace Core.Tests.Models
             Assert.Equal(8.5, adult.CalculatePrice());
         }
 
-        [Theory, MemberData(nameof(CalculatePrice_MonThurs))]
+        [Theory]
+        [MemberData(nameof(CalculatePrice_MonThurs))]
         public void CalculatePrice_2D_MonThurs_WithPopcorn_Valid(DateTime dateTime)
         {
             var screening = new Screening
@@ -74,7 +83,8 @@ namespace Core.Tests.Models
             Assert.Equal(11.5, adult.CalculatePrice());
         }
 
-        [Theory, MemberData(nameof(CalculatePrice_FriSun))]
+        [Theory]
+        [MemberData(nameof(CalculatePrice_FriSun))]
         public void CalculatePrice_2D_FriSun_NoPopcorn_Valid(DateTime dateTime)
         {
             var screening = new Screening
@@ -88,7 +98,8 @@ namespace Core.Tests.Models
             Assert.Equal(12.5, adult.CalculatePrice());
         }
 
-        [Theory, MemberData(nameof(CalculatePrice_FriSun))]
+        [Theory]
+        [MemberData(nameof(CalculatePrice_FriSun))]
         public void CalculatePrice_2D_FriSun_WithPopcorn_Valid(DateTime dateTime)
         {
             var screening = new Screening
@@ -102,7 +113,8 @@ namespace Core.Tests.Models
             Assert.Equal(15.5, adult.CalculatePrice());
         }
 
-        [Theory, MemberData(nameof(CalculatePrice_MonThurs))]
+        [Theory]
+        [MemberData(nameof(CalculatePrice_MonThurs))]
         public void CalculatePrice_3D_MonThurs_NoPopcorn_Valid(DateTime dateTime)
         {
             var screening = new Screening
@@ -116,7 +128,8 @@ namespace Core.Tests.Models
             Assert.Equal(11, adult.CalculatePrice());
         }
 
-        [Theory, MemberData(nameof(CalculatePrice_MonThurs))]
+        [Theory]
+        [MemberData(nameof(CalculatePrice_MonThurs))]
         public void CalculatePrice_3D_MonThurs_WithPopcorn_Valid(DateTime dateTime)
         {
             var screening = new Screening
@@ -130,7 +143,8 @@ namespace Core.Tests.Models
             Assert.Equal(14, adult.CalculatePrice());
         }
 
-        [Theory, MemberData(nameof(CalculatePrice_FriSun))]
+        [Theory]
+        [MemberData(nameof(CalculatePrice_FriSun))]
         public void CalculatePrice_3D_FriSun_NoPopcorn_Valid(DateTime dateTime)
         {
             var screening = new Screening
@@ -144,7 +158,8 @@ namespace Core.Tests.Models
             Assert.Equal(14, adult.CalculatePrice());
         }
 
-        [Theory, MemberData(nameof(CalculatePrice_FriSun))]
+        [Theory]
+        [MemberData(nameof(CalculatePrice_FriSun))]
         public void CalculatePrice_3D_FriSun_WithPopcorn_Valid(DateTime dateTime)
         {
             var screening = new Screening

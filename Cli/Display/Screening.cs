@@ -1,11 +1,21 @@
-﻿using System;
+//============================================================
+// Student Number : S10219526, S10227463
+// Student Name : Qin Guan, Richard Paul Pamintuan
+// Module Group : T07
+//============================================================
+
+
+using System;
 using System.Collections.Generic;
 using Core.Models;
+using Order = Core.UseCases.Order;
 
 namespace Cli.Display
 {
     public class Screening
     {
+        private readonly Core.UseCases.Cinema _cinema;
+
         private readonly Dictionary<string, int> _classifications = new()
         {
             { "PG13", 13 },
@@ -14,20 +24,19 @@ namespace Cli.Display
             { "R21", 21 }
         };
 
+        private readonly IDisplay _display;
+        private readonly Core.UseCases.Movie _movie;
+        private readonly Order _order;
+        private readonly Core.UseCases.Screening _screening;
+
         private readonly List<string> _study = new() { "Primary", "Secondary", "Tertiary" };
         private readonly List<string> _ticketType = new() { "Student", "Senior Citizen", "Adult" };
-
-        private readonly IDisplay _display;
-        private readonly Core.UseCases.Screening _screening;
-        private readonly Core.UseCases.Movie _movie;
-        private readonly Core.UseCases.Order _order;
-        private readonly Core.UseCases.Cinema _cinema;
 
         public Screening(
             IDisplay display,
             Core.UseCases.Screening screening,
             Core.UseCases.Movie movie,
-            Core.UseCases.Order order,
+            Order order,
             Core.UseCases.Cinema cinema
         )
         {
@@ -197,7 +206,7 @@ namespace Cli.Display
 
             var order = _order.Add(tickets);
 
-            _display.Text($"Confirm order:");
+            _display.Text("Confirm order:");
             _display.Text($"Movie title: {movies[movieIdx].Title}");
             _display.Text($"Screening date time: {screenings[screeningIdx].ScreeningDateTime}");
             _display.Text($"Cinema: {screenings[screeningIdx].Cinema.Name}");

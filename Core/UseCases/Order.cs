@@ -1,4 +1,11 @@
-﻿using System;
+//============================================================
+// Student Number : S10219526, S10227463
+// Student Name : Qin Guan, Richard Paul Pamintuan
+// Module Group : T07
+//============================================================
+
+
+using System;
 using System.Collections.Generic;
 using Core.Models;
 using Core.Repository;
@@ -11,21 +18,30 @@ namespace Core.UseCases
         private readonly IOrder _orderRepository;
         private readonly IScreening _screeningRepository;
 
-        public Order(IDateTimeProvider dateTimeProvider, IOrder orderRepository, IScreening screeningRepository) =>
+        public Order(IDateTimeProvider dateTimeProvider, IOrder orderRepository, IScreening screeningRepository)
+        {
             (_dateTimeProvider, _orderRepository, _screeningRepository) =
-            (dateTimeProvider, orderRepository, screeningRepository);
+                (dateTimeProvider, orderRepository, screeningRepository);
+        }
 
-        public Core.Models.Order FindByNo(int no) => _orderRepository.FindByNo(no);
-        public List<Core.Models.Order> FindAll() => _orderRepository.FindAll();
+        public Models.Order FindByNo(int no)
+        {
+            return _orderRepository.FindByNo(no);
+        }
 
-        public Core.Models.Order Add(List<Ticket> tickets)
+        public List<Models.Order> FindAll()
+        {
+            return _orderRepository.FindAll();
+        }
+
+        public Models.Order Add(List<Ticket> tickets)
         {
             if (tickets.Count == 0) throw new Exception("List of tickets cannot be empty");
 
-            var order = new Core.Models.Order(_orderRepository.FindAll().Count + 1, _dateTimeProvider.Now())
+            var order = new Models.Order(_orderRepository.FindAll().Count + 1, _dateTimeProvider.Now())
             {
                 TicketList = tickets,
-                Status = "Unpaid",
+                Status = "Unpaid"
             };
 
             var screeningNo = -1;
@@ -47,7 +63,7 @@ namespace Core.UseCases
             return order;
         }
 
-        public Core.Models.Order Pay(int orderNo)
+        public Models.Order Pay(int orderNo)
         {
             var order = _orderRepository.FindByNo(orderNo);
             if (order is null) throw new Exception("Order does not exist");

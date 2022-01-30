@@ -33,7 +33,6 @@ namespace Cli.Display
                 "Order movie tickets",
                 "Cancel order of ticket",
                 "Recommend movies",
-                "Display available seats of screening session",
             };
 
             _display.Clear();
@@ -50,39 +49,40 @@ namespace Cli.Display
 
                 switch (option)
                 {
-                    case 0:
+                    case -1:
                         _hostApplicationLifetime.StopApplication();
                         return Task.CompletedTask;
-                    case 1:
+                    case 0:
                         _movie.LoadData();
                         _cinema.LoadData();
                         break;
-                    case 2:
+                    case 1:
                         _screening.LoadData();
                         break;
-                    case 3:
+                    case 2:
                         _movie.ListAllMovies();
                         break;
-                    case 4:
+                    case 3:
                         _screening.ListAllScreenings();
                         break;
-                    case 5:
+                    case 4:
                         _screening.AddScreening();
                         break;
-                    case 6:
+                    case 5:
                         _screening.RemoveScreening();
                         break;
-                    case 7:
+                    case 6:
                         _screening.OrderTickets();
                         break;
-                    case 8:
+                    case 7:
                         _screening.CancelOrder();
                         break;
-                    case 9:
+                    case 8:
                         _movie.RecommendTop3Movie();
                         break;
                 }
             }
+
             return Task.CompletedTask;
         }
     }

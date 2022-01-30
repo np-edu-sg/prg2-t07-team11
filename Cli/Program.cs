@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 
 using Cli.Display;
 using Cli.Extensions;
+using Core;
 
 namespace Cli
 {
@@ -18,6 +19,7 @@ namespace Cli
             await Host.CreateDefaultBuilder(args)
                 .ConfigureServices(services =>
                 {
+                    services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
                     services.AddSingleton<Window>();
 
                     services

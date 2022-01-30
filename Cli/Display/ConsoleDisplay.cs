@@ -121,13 +121,13 @@ namespace Cli.Display
                 Console.WriteLine(error);
             }
 
-            return (T)Convert.ChangeType(input, typeof(T));
+            return (T) Convert.ChangeType(input, typeof(T));
         }
 
         public T Input<T>(string message)
         {
             Console.Write(message);
-            return (T)Convert.ChangeType(Console.ReadLine(), typeof(T));
+            return (T) Convert.ChangeType(Console.ReadLine(), typeof(T));
         }
 
         public int MenuInput(List<string> items, string message, string error)
@@ -155,7 +155,7 @@ namespace Cli.Display
                 Console.Write(message);
                 Console.ForegroundColor = ConsoleColor.White;
 
-                if (int.TryParse(Console.ReadLine(), out input) && -1 < input && input < items.Count) break;
+                if (int.TryParse(Console.ReadLine(), out input) && -1 < input && input <= items.Count) break;
 
                 Console.BackgroundColor = ConsoleColor.Red;
                 Console.ForegroundColor = ConsoleColor.White;
@@ -166,7 +166,7 @@ namespace Cli.Display
 
             Console.ResetColor();
 
-            return input;
+            return input - 1;
         }
     }
 }

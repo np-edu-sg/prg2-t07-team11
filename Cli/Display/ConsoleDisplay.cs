@@ -168,7 +168,7 @@ namespace Cli.Display
                 Console.WriteLine(error);
             }
 
-            return (T) Convert.ChangeType(input, typeof(T));
+            return (T)Convert.ChangeType(input, typeof(T));
         }
 
         public T Input<T>(string message)
@@ -183,7 +183,7 @@ namespace Cli.Display
             var input = Console.ReadLine();
             if (input == "escape") throw new Exception("User cancelled");
 
-            return (T) Convert.ChangeType(input, typeof(T));
+            return (T)Convert.ChangeType(input, typeof(T));
         }
 
         public int MenuInput(List<string> items, string message, string error)

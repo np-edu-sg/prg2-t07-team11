@@ -44,7 +44,9 @@ namespace Cli.Display
             _movie.LoadData();
             _display.Text("Loaded movie data!");
         }
-
+        /// <summary>
+        /// ListAllMovies Method takes in the list of movies from the movies repository and outputs them for the user to see which movies are available
+        /// </summary>
         public void ListAllMovies()
         {
             var movies = _movie.FindAll();
@@ -56,7 +58,9 @@ namespace Cli.Display
 
             _display.Table(movies, Core.Models.Movie.Header);
         }
-
+        /// <summary>
+        /// RecommendTop3Movies Method takes in the Top 3 Movies from the UseCase Top3Movies method and Display it to the user
+        /// </summary>
         public void RecommendTop3Movies()
         {
             var top = _movie.Top3Movies();

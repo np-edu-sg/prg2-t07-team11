@@ -30,7 +30,10 @@ namespace Core.UseCases
         {
             return _movieRepository.FindAll();
         }
-
+        /// <summary>
+        /// Top3Movies Method Makes a Movie Dictionary out of the Movie Titles and the tickets ordered and sorts them from the top to bottom and returns the top 3 movies
+        /// </summary>
+        /// <returns>The value returns the top 3 movie dictionary</returns>
         public Dictionary<string, int> Top3Movies()
         {
             var movieTitleList = new List<string>();

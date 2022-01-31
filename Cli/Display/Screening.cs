@@ -163,7 +163,7 @@ namespace Cli.Display
 
             _screening.Remove(screenings[screeningIdxInput]);
         }
-        
+
         public void OrderTickets()
         {
             var movies = _movie.FindAll();

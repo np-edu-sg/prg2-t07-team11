@@ -87,14 +87,14 @@ namespace Core.Tests.UseCases
             usecase.FindAllWithoutTickets();
             ScreeningRepositoryMock.Verify(s => s.FindAllWithoutTickets(), Times.Once());
         }
-        
+
         [Fact]
         public void Remove_CallsRepositoryRemove()
         {
             var usecase = new Core.UseCases.Screening(ScreeningRepositoryMock.Object, CinemaRepositoryMock.Object,
                 MovieRepositoryMock.Object);
             usecase.Remove(Fixtures.Screenings[0]);
-            
+
             ScreeningRepositoryMock.Verify(s => s.Remove(Fixtures.Screenings[0]), Times.Once());
         }
     }

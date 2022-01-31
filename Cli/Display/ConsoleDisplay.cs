@@ -150,6 +150,83 @@ namespace Cli.Display
             }
         }
 
+        public int InteractiveTableInput<T>(List<T> list, string header, string hint)
+        {
+            var width = _window.Width;
+            var height = -_window.Height;
+
+            var selected = 0;
+            Console.Clear();
+
+            while (true)
+            {
+                if (_window.Width != width || _window.Height != height)
+                {
+                    (width, height) = (_window.Width, _window.Height);
+                    Console.Clear();
+                }
+
+                Console.SetCursorPosition(0, 0);
+
+                Console.BackgroundColor = ConsoleColor.DarkGray;
+                Console.ForegroundColor = ConsoleColor.White;
+
+                Console.WriteLine(header);
+
+                Console.ResetColor();
+
+                for (var idx = 0; idx < list.Count; idx++)
+                {
+                    if (idx == selected)
+                    {
+                        Console.BackgroundColor = ConsoleColor.Gray;
+                        Console.ForegroundColor = ConsoleColor.Black;
+                    }
+
+                    Console.WriteLine(list[idx]);
+                    Console.ResetColor();
+                }
+
+                Console.WriteLine();
+
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine(hint);
+
+                Console.ForegroundColor = ConsoleColor.Black;
+                Console.BackgroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("Press ESC or F4 to cancel");
+
+                Console.ResetColor();
+
+                ConsoleKeyInfo key;
+                while (true)
+                {
+                    key = Console.ReadKey();
+                    if (key.Key is ConsoleKey.UpArrow or ConsoleKey.DownArrow or ConsoleKey.F4
+                        or ConsoleKey.Enter) break;
+                }
+
+                switch (key.Key)
+                {
+                    case ConsoleKey.UpArrow:
+                        if (selected > 0) selected--;
+                        break;
+                    case ConsoleKey.DownArrow:
+                        if (selected < list.Count - 1) selected++;
+                        break;
+                    case ConsoleKey.Escape:
+                    case ConsoleKey.F4:
+                        Console.WriteLine();
+                        return -1;
+                    case ConsoleKey.Enter:
+                        Console.WriteLine();
+                        return selected;
+                    default:
+                        throw new Exception("What?");
+                }
+            }
+        }
+
         public T Input<T>(string message, string error, Predicate<string> validator)
         {
             Console.WriteLine();
@@ -168,7 +245,7 @@ namespace Cli.Display
                 Console.WriteLine(error);
             }
 
-            return (T)Convert.ChangeType(input, typeof(T));
+            return (T) Convert.ChangeType(input, typeof(T));
         }
 
         public T Input<T>(string message)
@@ -183,7 +260,7 @@ namespace Cli.Display
             var input = Console.ReadLine();
             if (input == "escape") throw new Exception("User cancelled");
 
-            return (T)Convert.ChangeType(input, typeof(T));
+            return (T) Convert.ChangeType(input, typeof(T));
         }
 
         public int MenuInput(List<string> items, string message, string error)

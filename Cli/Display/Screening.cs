@@ -43,10 +43,10 @@ namespace Cli.Display
 
         private readonly Dictionary<string, int> _classifications = new()
         {
-            { "PG13", 13 },
-            { "NC16", 16 },
-            { "M18", 18 },
-            { "R21", 21 }
+            {"PG13", 13},
+            {"NC16", 16},
+            {"M18", 18},
+            {"R21", 21}
         };
 
         private readonly IDisplay _display;
@@ -54,8 +54,8 @@ namespace Cli.Display
         private readonly Order _order;
         private readonly Core.UseCases.Screening _screening;
 
-        private readonly List<string> _study = new() { "Primary", "Secondary", "Tertiary" };
-        private readonly List<string> _ticketType = new() { "Student", "Senior Citizen", "Adult" };
+        private readonly List<string> _study = new() {"Primary", "Secondary", "Tertiary"};
+        private readonly List<string> _ticketType = new() {"Student", "Senior Citizen", "Adult"};
 
         public Screening(
             IDisplay display,
@@ -83,9 +83,8 @@ namespace Cli.Display
         {
             var movies = _movie.FindAll();
 
-            var movieIdxInput = _display.InteractiveTableInput(movies, Core.Models.Movie.Header);
+            var movieIdxInput = _display.InteractiveTableInput(movies, Core.Models.Movie.Header, "Choose a screening");
             if (movieIdxInput == -1) return;
-
 
             var screenTypeInput = _display.Input<string>("Enter Screening Type [2D/3D]: ", "Wrong Screen Type",
                 s => s is "2D" or "3D");
@@ -93,7 +92,7 @@ namespace Cli.Display
                 "Input Is Not In DateTime format", s => DateTime.TryParse(s, out _));
 
             var cinemas = _cinema.FindAll();
-            var cinemaIdx = _display.InteractiveTableInput(cinemas, Core.Models.Cinema.Header);
+            var cinemaIdx = _display.InteractiveTableInput(cinemas, Core.Models.Cinema.Header, "Choose a cinema");
 
             try
             {
@@ -125,7 +124,7 @@ namespace Cli.Display
                 return;
             }
 
-            var movieIdxInput = _display.InteractiveTableInput(movies, Core.Models.Movie.Header);
+            var movieIdxInput = _display.InteractiveTableInput(movies, Core.Models.Movie.Header, "Choose a movie");
             if (movieIdxInput == -1) return;
 
             var screenings = _screening.FindAllByMovieTitle(movies[movieIdxInput].Title);
@@ -151,7 +150,7 @@ namespace Cli.Display
                 return;
             }
 
-            var screeningIdxInput = _display.InteractiveTableInput(screenings, Core.Models.Screening.Header);
+            var screeningIdxInput = _display.InteractiveTableInput(screenings, Core.Models.Screening.Header, "Choose a screening");
             if (screeningIdxInput == -1) return;
 
             _screening.Remove(screenings[screeningIdxInput]);
@@ -160,7 +159,7 @@ namespace Cli.Display
         public void OrderTickets()
         {
             var movies = _movie.FindAll();
-            var movieIdx = _display.InteractiveTableInput(movies, Core.Models.Movie.Header);
+            var movieIdx = _display.InteractiveTableInput(movies, Core.Models.Movie.Header, "Choose a movie");
             if (movieIdx == -1) return;
 
             var screenings = _screening.FindAllByMovieTitle(movies[movieIdx].Title);
@@ -170,7 +169,7 @@ namespace Cli.Display
                 return;
             }
 
-            var screeningIdx = _display.InteractiveTableInput(screenings, Core.Models.Screening.Header);
+            var screeningIdx = _display.InteractiveTableInput(screenings, Core.Models.Screening.Header, "Choose a screening");
             if (screeningIdx == -1) return;
 
             _display.Text($"Number of tickets left: {screenings[screeningIdx].SeatsRemaining}");
@@ -201,7 +200,8 @@ namespace Cli.Display
                 {
                     var type = _display.InteractiveTableInput(
                         _ticketType,
-                        $"[Ticket {idx + 1}/{noTickets}] Please select type: "
+                        $"[Ticket {idx + 1}/{noTickets}] Please select type: ",
+                        "Choose a ticket type"
                     );
                     if (type == -1) return;
 
@@ -209,7 +209,8 @@ namespace Cli.Display
                     {
                         var idx2 = _display.InteractiveTableInput(
                             _study,
-                            $"[Ticket {idx + 1}/{noTickets}] Please enter level of study: "
+                            $"[Ticket {idx + 1}/{noTickets}] Please enter level of study: ",
+                            "Choose your level of study"
                         );
                         if (idx2 == -1) return;
 

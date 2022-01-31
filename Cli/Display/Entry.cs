@@ -45,8 +45,6 @@ namespace Cli.Display
 
             _display.Clear();
             _display.Header("Welcome to Singa Cineplexes");
-            _display.Text(
-                "Press CTRL-C or SIGTERM to request stop. The program may not honor your request. Use the Exit function instead to always exit successfully.");
 
             while (!stoppingToken.IsCancellationRequested)
             {

@@ -23,7 +23,7 @@ namespace Cli.Display
         public T Input<T>(string message);
 
         /// <summary>
-        ///     MenuInput should show a menu with option 0 as exit.
+        /// MenuInput should show a menu with option 0 as exit.
         /// </summary>
         /// <param name="items"></param>
         /// <param name="message"></param>
@@ -33,6 +33,23 @@ namespace Cli.Display
         /// </returns>
         public int MenuInput(List<string> items, string message, string error);
 
+        /// <summary>
+        /// Interactive table selection
+        /// </summary>
+        /// <param name="list"></param>
+        /// <param name="header"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns>Index of selected item in list. -1 if user cancelled</returns>
         public int InteractiveTableInput<T>(List<T> list, string header);
+
+        /// <summary>
+        /// Interactive table selection that shows a hint at the bottom
+        /// </summary>
+        /// <param name="list"></param>
+        /// <param name="header"></param>
+        /// <param name="hint"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns>Index of selected item in list. -1 if user cancelled</returns>
+        public int InteractiveTableInput<T>(List<T> list, string header, string hint);
     }
 }

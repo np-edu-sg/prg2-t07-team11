@@ -78,5 +78,24 @@ namespace Core.Tests.UseCases
                     screening.Cinema.HallNo, screening.Movie.Title);
             }));
         }
+
+        [Fact]
+        public void FindAllWithoutTickets_CallsRepositoryFindAllWithoutTickets()
+        {
+            var usecase = new Core.UseCases.Screening(ScreeningRepositoryMock.Object, CinemaRepositoryMock.Object,
+                MovieRepositoryMock.Object);
+            usecase.FindAllWithoutTickets();
+            ScreeningRepositoryMock.Verify(s => s.FindAllWithoutTickets(), Times.Once());
+        }
+        
+        [Fact]
+        public void Remove_CallsRepositoryRemove()
+        {
+            var usecase = new Core.UseCases.Screening(ScreeningRepositoryMock.Object, CinemaRepositoryMock.Object,
+                MovieRepositoryMock.Object);
+            usecase.Remove(Fixtures.Screenings[0]);
+            
+            ScreeningRepositoryMock.Verify(s => s.Remove(Fixtures.Screenings[0]), Times.Once());
+        }
     }
 }

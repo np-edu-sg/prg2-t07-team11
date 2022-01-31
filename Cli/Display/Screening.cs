@@ -78,7 +78,9 @@ namespace Cli.Display
             _screening.LoadData();
             _display.Text("Loaded screening data!");
         }
-
+        /// <summary>
+        /// AddScreening will prompt the user to select a movie, Enter Screening Type and the desired Screening Date and Time and If all datas are correct it will pass it to the UseCases.Screening class for data validation 
+        /// </summary>
         public void AddScreening()
         {
             var movies = _movie.FindAll();
@@ -116,6 +118,9 @@ namespace Cli.Display
         }
 
         // Richard did this
+        /// <summary>
+        /// DisplayScreeningSessionsMovie Method display all the movies that are available and prompts the user to choose a movie to display all the available screenings
+        /// </summary>
         public void DisplayScreeningSessionsMovie()
         {
             var movies = _movie.FindAll();
@@ -141,7 +146,9 @@ namespace Cli.Display
 
             _display.Table(customScreenings, CustomScreening.Header);
         }
-
+        /// <summary>
+        /// RemoveScreening Method displays all the screening for the user to choose to if they want to remove a screening without any tickets sold
+        /// </summary>
         public void RemoveScreening()
         {
             var screenings = _screening.FindAllWithoutTickets();
@@ -156,7 +163,7 @@ namespace Cli.Display
 
             _screening.Remove(screenings[screeningIdxInput]);
         }
-
+        
         public void OrderTickets()
         {
             var movies = _movie.FindAll();

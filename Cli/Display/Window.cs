@@ -23,6 +23,9 @@ namespace Cli.Display
         public int Height { get; set; }
     }
 
+    /// <summary>
+    /// Detect window changes
+    /// </summary>
     public class Window : BackgroundService
     {
         public delegate void ResizeEventHandler(object sender, ResizeEventArgs args);

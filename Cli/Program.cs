@@ -22,6 +22,7 @@ namespace Cli
         {
             Console.WriteLine("Loading...");
 
+            // Create a generic host to have DI and background services (Window)
             await Host.CreateDefaultBuilder(args)
                 .ConfigureServices(services =>
                 {

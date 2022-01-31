@@ -46,6 +46,9 @@ namespace Cli.Display
             _display.Clear();
             _display.Header("Welcome to Singa Cineplexes");
 
+            // Due to the generic host, SIGTERM will only issue a cancellation request.
+            // If the user is still in the loop, the program may not exit.
+            // Use option 0 to always exit successfully.
             while (!stoppingToken.IsCancellationRequested)
             {
                 Console.WriteLine();
